@@ -4,13 +4,14 @@ namespace PortalNotasFaculdades.Models
     using System.Data.Entity;
     using System.ComponentModel.DataAnnotations.Schema;
     using System.Linq;
-    using PortalNotasFaculdades.Areas.AdminPortal.Models;    
+    using PortalNotasFaculdades.Areas.AdminPortal.Models;
+    using PortalNotasFaculdades.Migrations;
 
     public partial class PortalContext : DbContext
     {
         public PortalContext(): base("name=PortalContext")
         {
-            
+            Database.SetInitializer(new MigrateDatabaseToLatestVersion<PortalContext, Configuration>());
         }
 
         public virtual DbSet<Alunos> Alunos { get; set; }
