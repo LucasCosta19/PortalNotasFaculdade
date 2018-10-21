@@ -303,6 +303,7 @@
     <Content Include="Content\Site.css" />
     <Content Include="Content\style.css" />
     <Content Include="Content\styleResp.css" />
+    <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
     <Content Include="Images\Backgrounds\aluno.png" />
     <Content Include="Images\Backgrounds\aluno2.png" />
@@ -393,6 +394,21 @@
     <Content Include="Scripts\esm\popper-utils.min.js" />
     <Content Include="Scripts\esm\popper.js" />
     <Content Include="Scripts\esm\popper.min.js" />
+    <Content Include="Areas\Financeiro\Views\web.config" />
+    <Content Include="Areas\Financeiro\Views\_ViewStart.cshtml" />
+    <Content Include="Areas\Financeiro\Views\Shared\_Layout.cshtml" />
+    <Content Include="Areas\Financeiro\Views\ContasBancarias\Create.cshtml" />
+    <Content Include="Areas\Financeiro\Views\ContasBancarias\Delete.cshtml" />
+    <Content Include="Areas\Financeiro\Views\ContasBancarias\Details.cshtml" />
+    <Content Include="Areas\Financeiro\Views\ContasBancarias\Edit.cshtml" />
+    <Content Include="Areas\Financeiro\Views\ContasBancarias\Index.cshtml" />
+    <Content Include="fonts\glyphicons-halflings-regular.woff" />
+    <Content Include="fonts\glyphicons-halflings-regular.ttf" />
+    <Content Include="fonts\glyphicons-halflings-regular.eot" />
+    <None Include="Scripts\jquery-1.10.2-vsdoc.js" />
+    <Content Include="Scripts\jquery-1.10.2.js" />
+    <Content Include="Scripts\jquery-1.10.2.min.js" />
+    <Content Include="Scripts\jquery-1.10.2.min.map" />
     <None Include="Scripts\jquery-3.3.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.3.1.js" />
     <Content Include="Scripts\jquery-3.3.1.min.js" />
@@ -405,6 +421,7 @@
     <Content Include="Scripts\jquery.validate.min.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
+    <Content Include="Scripts\modernizr-2.6.2.js" />
     <Content Include="Scripts\modernizr-2.8.3.js" />
     <Content Include="Scripts\MyDataTables.js" />
     <Content Include="Scripts\NotasCalc.js" />
@@ -429,6 +446,9 @@
     <Compile Include="Areas\AdminPortal\Models\Faculdades.cs" />
     <Compile Include="Areas\AdminPortal\Models\UsuariosAdmin.cs" />
     <Compile Include="Areas\AdminPortal\Models\UsuariosFaculdades.cs" />
+    <Compile Include="Areas\Financeiro\Controllers\ContasBancariasController.cs" />
+    <Compile Include="Areas\Financeiro\FinanceiroAreaRegistration.cs" />
+    <Compile Include="Areas\Financeiro\Models\ContasBancarias.cs" />
     <Compile Include="Classes\CombosHelper.cs" />
     <Compile Include="Controllers\AlunosController.cs" />
     <Compile Include="Controllers\CursosController.cs" />

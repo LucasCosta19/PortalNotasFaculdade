@@ -88,5 +88,7 @@ namespace PortalNotasFaculdades.Models
                 .WithOptional(e => e.Faculdades)
                 .WillCascadeOnDelete();*/
         }
+
+        public System.Data.Entity.DbSet<PortalNotasFaculdades.Areas.Financeiro.Models.ContasBancarias> ContasBancarias { get; set; }
     }
 }

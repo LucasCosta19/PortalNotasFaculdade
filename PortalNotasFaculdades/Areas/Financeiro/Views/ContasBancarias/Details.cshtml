@@ -1,0 +1,82 @@
+﻿@model PortalNotasFaculdades.Areas.Financeiro.Models.ContasBancarias
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>ContasBancarias</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.NomeBanco)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.NomeBanco)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.NomeProprietario)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.NomeProprietario)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.NumeroConta)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.NumeroConta)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Agencia)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Agencia)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.SaldoInicial)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.SaldoInicial)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.DataSaldoInicial)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.DataSaldoInicial)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.SaldoAtual)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.SaldoAtual)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.DataInsercao)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.DataInsercao)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.ContaBancariaId }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>
