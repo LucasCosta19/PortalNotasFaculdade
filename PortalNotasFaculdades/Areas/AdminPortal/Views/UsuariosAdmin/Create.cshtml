@@ -1,0 +1,73 @@
+﻿@model PortalNotasFaculdades.Areas.AdminPortal.Models.UsuariosAdmin
+
+@{
+    ViewBag.Title = "Admins";
+}
+
+<br />
+<div class="container">
+    <h2 style="text-align: center;"><strong>Admins</strong></h2>
+    <hr />
+    @{
+        if (TempData["MessageErr"] != null)
+        {
+            <p class="alert alert-danger">@TempData["MessageErr"]</p>
+        }
+    }
+    <div class="formCreate">
+        @using (Html.BeginForm())
+        {
+            @Html.AntiForgeryToken()
+
+            <div class="">
+                @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                <div class="form-group">
+                    @Html.LabelFor(model => model.Nome, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.Nome, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.Nome, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.Email, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.Email, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.Email, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.Senha, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.Senha, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.Senha, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.DataCadastro, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.DataCadastro, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.DataCadastro, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <div class="col-md-offset-2 col-md-10">
+                        <input type="submit" value="Salvar" class="btn btn-success" /> |
+                        @Html.ActionLink("Voltar á Lista", "Index", new { }, new { @class = "btn btn-secondary" })
+                    </div>
+                </div>
+            </div>
+        }
+        </div>
+    </div>
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        $('a').removeClass("active");
+        $("#adm").addClass("active");
+
+    });
+</script>

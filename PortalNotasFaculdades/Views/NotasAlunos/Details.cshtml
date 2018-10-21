@@ -1,0 +1,191 @@
+﻿@{
+    var sessao = Convert.ToString(Session["Tipo"]);
+    if (sessao == "Aluno" || sessao == "Professor")
+    {
+        Response.Write("<script>location.href='http://localhost:51948/NotasAlunosPortal';</script>");
+    }
+}
+
+@model PortalNotasFaculdades.Models.NotasAlunos
+
+@{
+    ViewBag.Title = "Notas";
+}
+
+<div class="topRefs">
+    <a href="~/Home">
+        <span class="sp1"><strong><i class="fa fa-home fa-2x"></i></strong></span>
+    </a>
+    <a href="~/NotasAlunos">
+        <span class="txt sp3"><strong>Notas</strong></span>
+    </a>
+    <a href="#">
+        <span class="txt sp4"><strong>Detalhes</strong></span>
+    </a>
+</div>
+<hr />
+
+<h2 style="text-align: center;"><strong>Notas Lançadas</strong></h2>
+<hr />
+
+<div>
+    <h4><strong>Detalhes - @Model.Alunos.NomeCompleto</strong></h4>
+    <hr />
+    <div class="table-responsive">
+        <table class="table table-bordered table-striped">
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.Alunos.NomeCompleto)
+                </th>
+                <td>
+                    @Html.DisplayFor(model => model.Alunos.NomeCompleto)
+                </td>
+            </tr>
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.Alunos.EmailUsuario)
+                </th>
+                <td>
+                    @Html.DisplayFor(model => model.Alunos.EmailUsuario)
+                </td>
+            </tr>
+
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.DisciplinasCursos.CursoId)
+                </th>
+                <td>
+                    @Html.DisplayFor(model => model.DisciplinasCursos.Cursos.NomeCurso)
+                </td>
+            </tr>
+
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.DisciplinasCursos.NomeDisciplina)
+                </th>
+                <td>
+                    @Html.DisplayFor(model => model.DisciplinasCursos.NomeDisciplina)
+                </td>
+            </tr>
+
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.TrabalhoNotaN1)
+                </th>
+                <td>
+                    @Html.DisplayFor(model => model.TrabalhoNotaN1)
+                </td>
+            </tr>
+
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.NotaProvaN1)
+                </th>
+                <td>
+                    @Html.DisplayFor(model => model.NotaProvaN1)
+                </td>
+            </tr>
+
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.TrabalhoNotaN2)
+                </th>
+                <td>
+                    @Html.DisplayFor(model => model.TrabalhoNotaN2)
+                </td>
+            </tr>
+
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.NotaProvaN2)
+                </th>
+                <td>
+                    @Html.DisplayFor(model => model.NotaProvaN2)
+                </td>
+            </tr>
+
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.TrabalhoNotaN3)
+                </th>
+                <td>
+                    @Html.DisplayFor(model => model.TrabalhoNotaN3)
+                </td>
+            </tr>
+
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.NotaProvaN3)
+                </th>
+                <td>
+                    @Html.DisplayFor(model => model.NotaProvaN3)
+                </td>
+            </tr>
+
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.MediaFinal)
+                </th>
+                <td>
+                    @Html.DisplayFor(model => model.MediaFinal)
+                </td>
+            </tr>
+
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.AulasDadas)
+                </th>
+                <td>
+                    @Html.DisplayFor(model => model.AulasDadas)
+                </td>
+            </tr>
+
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.QuantidadeFaltas)
+                </th>
+                <td>
+                    @Html.DisplayFor(model => model.QuantidadeFaltas)
+                </td>
+            </tr>
+
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.PercentualFaltas)
+                </th>
+                <td>
+                    @Html.DisplayFor(model => model.PercentualFaltas)
+                </td>
+            </tr>
+
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.SituacaoAluno)
+                </th>
+                <td>
+                    @Html.DisplayFor(model => model.SituacaoAluno)
+                </td>
+            </tr>
+
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.DataInsercao)
+                </th>
+                <td>
+                    @Html.DisplayFor(model => model.DataInsercao)
+                </td>
+            </tr>
+        </table>
+    </div>
+</div>
+<p>
+    @Html.ActionLink("Editar", "Edit", new { id = Model.NotaId }, new { @class = "btn btn-info" }) |
+    @Html.ActionLink("Voltar á Lista", "Index", new { }, new { @class = "btn btn-secondary" })
+</p>
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        $('a').removeClass("active");
+        $("#not").addClass("active");
+    });
+</script>

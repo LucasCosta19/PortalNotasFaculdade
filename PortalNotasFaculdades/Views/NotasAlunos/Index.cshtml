@@ -1,0 +1,346 @@
+﻿@model IEnumerable<PortalNotasFaculdades.Models.NotasAlunos>
+
+@{
+    ViewBag.Title = "Notas";
+}
+
+<div class="topRefs">
+    <a href="~/Home">
+        <span class="sp1"><strong><i class="fa fa-home fa-2x"></i></strong></span>
+    </a>
+    <a href="~/NotasAlunos">
+        <span class="txt sp3"><strong>Notas</strong></span>
+    </a>
+</div>
+<hr />
+
+<h2 style="text-align: center;"><strong>Notas Lançadas</strong></h2>
+<hr />
+
+@{
+    if (TempData["MessageErr"] != null) {
+        <p class="alert alert-danger" style="min-width: 100%!important;">@TempData["MessageErr"] </p>
+    }
+    if (TempData["Message"] != null) {
+        <p class="alert alert-success">@TempData["Message"] </p>
+    }
+}
+@{
+    var sessao = Convert.ToString(Session["Tipo"]);
+
+    if (sessao == "Master") {
+        <p>
+            @Html.ActionLink("Lançar Nota", "Create", new { }, new { @class = "btn btn-primary" })
+        </p>
+
+        <div class="table-responsive" id="tbData">
+            <table class="table table-striped table-bordered table-light" id="table" style="width:100%">
+                <thead>
+                    <tr>
+                        <th>
+                            Disciplina
+                        </th>
+                        <th>
+                            Nome Completo
+                        </th>
+                        <th>
+                            Média Final
+                        </th>
+                        <th>
+                            Situação
+                        </th>
+                        <th>Ações</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model) {
+                        <tr>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.DisciplinasCursos.NomeDisciplina)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Alunos.NomeCompleto)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.MediaFinal)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.SituacaoAluno)
+                            </td>
+                            <td>
+                                @Html.ActionLink("Editar", "Edit", new { id = item.NotaId }, new { @class = "btn btn-secondary" })
+                                @Html.ActionLink("Detalhes", "Details", new { id = item.NotaId }, new { @class = "btn btn-info" })
+                                @Html.ActionLink("Deletar", "Delete", new { id = item.NotaId }, new { @class = "btn btn-danger" })
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+        @section styles{
+            <link href="@Url.Content("~/content/DataTables/css/dataTables.bootstrap.css")" rel="stylesheet" />
+        }
+        @section ScriptPage	{
+            <script src="@Url.Content("~/scripts/DataTables/jquery.dataTables.js")"></script>
+            <script src="@Url.Content("~/scripts/DataTables/dataTables.bootstrap4.js")"></script>
+
+        }
+    }
+
+    if (sessao == "Aluno") {
+        if (TempData["buscaErr"] != null) {
+            <p class="alert alert-danger" style="min-width: 100%!important;">@TempData["buscaErr"] </p>
+        }
+        <div class="table-responsive">
+            @foreach (var item in Model) {
+                <span class="line"></span>
+                <h4 style="text-align: center; margin-bottom: 10px;"><strong>Disciplina: @Html.DisplayFor(modelItem => item.DisciplinasCursos.NomeDisciplina)</strong></h4>
+                <table class="table table-bordered">
+                    <tr>
+                        <th>
+                            @Html.DisplayNameFor(model => model.Alunos.NomeCompleto)
+                        </th>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Alunos.NomeCompleto)
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <th>
+                            @Html.DisplayNameFor(model => model.DisciplinasCursos.NomeDisciplina)
+                        </th>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.DisciplinasCursos.NomeDisciplina)
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <th>
+                            @Html.DisplayNameFor(model => model.DisciplinasCursos.SemestreDisciplina)
+                        </th>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.DisciplinasCursos.SemestreDisciplina)
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <th class="n1">
+                            @Html.DisplayNameFor(model => model.TrabalhoNotaN1)
+                        </th>
+                        <td class="n1">
+                            @Html.DisplayFor(modelItem => item.TrabalhoNotaN1)
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <th class="n1">
+                            @Html.DisplayNameFor(model => model.NotaProvaN1)
+                        </th>
+                        <td class="n1">
+                            @Html.DisplayFor(modelItem => item.NotaProvaN1)
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <th class="n2">
+                            @Html.DisplayNameFor(model => model.TrabalhoNotaN2)
+                        </th>
+                        <td class="n2">
+                            @Html.DisplayFor(modelItem => item.TrabalhoNotaN2)
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <th class="n2">
+                            @Html.DisplayNameFor(model => model.NotaProvaN2)
+                        </th>
+                        <td class="n2">
+                            @Html.DisplayFor(modelItem => item.NotaProvaN2)
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <th class="n3">
+                            @Html.DisplayNameFor(model => model.TrabalhoNotaN3)
+                        </th>
+                        <td class="n3">
+                            @Html.DisplayFor(modelItem => item.TrabalhoNotaN3)
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <th class="n3">
+                            @Html.DisplayNameFor(model => model.NotaProvaN3)
+                        </th>
+                        <td class="n3">
+                            @Html.DisplayFor(modelItem => item.NotaProvaN3)
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <th class="mFim">
+                            @Html.DisplayNameFor(model => model.MediaFinal)
+                        </th>
+                        <td class="mFim">
+                            @Html.DisplayFor(modelItem => item.MediaFinal)
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <th>
+                            @Html.DisplayNameFor(model => model.AulasDadas)
+                        </th>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.AulasDadas)
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <th>
+                            @Html.DisplayNameFor(model => model.QuantidadeFaltas)
+                        </th>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.QuantidadeFaltas)
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <th>
+                            @Html.DisplayNameFor(model => model.PercentualFaltas)
+                        </th>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.PercentualFaltas)%
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <th>
+                            @Html.DisplayNameFor(model => model.ExameFinal)
+                        </th>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.ExameFinal)
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <th class="sA">
+                            @Html.DisplayNameFor(model => model.SituacaoAluno)
+                        </th>
+                        <td class="sA">
+                            @Html.DisplayFor(modelItem => item.SituacaoAluno)
+                        </td>
+                    </tr>
+
+                </table>
+            }
+        </div>
+
+    }
+
+    if (sessao == "Professor") {
+        <p>
+            @Html.ActionLink("Lançar Nota", "Create", new { }, new { @class = "btn btn-primary" })
+        </p>
+
+        <div class="table-responsive" id="tbData">
+            <table class="table table-striped table-bordered table-light" id="table" style="width:100%">
+                <thead>
+                    <tr>
+                        <th>
+                            Nome
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.DisciplinasCursos.NomeDisciplina)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.MediaFinal)
+                        </th>
+                        <th>
+                            Faltas
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.ExameFinal)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.SituacaoAluno)
+                        </th>
+                        <th>Ações</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model) {
+                    <tr>
+                        <td>
+                        @Html.DisplayFor(modelItem => item.Alunos.NomeCompleto)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.DisciplinasCursos.NomeDisciplina)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.MediaFinal)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.PercentualFaltas)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.ExameFinal)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.SituacaoAluno)
+                        </td>
+                        <td>
+                            @{
+                                if (item.SituacaoAluno == "Exame Final                             ") {
+                                    @Html.ActionLink("Lançar Nota Exame", "Edit", new { id = item.NotaId, param1 = item.Alunos.NomeCompleto, param2 = item.DisciplinasCursos.NomeDisciplina }, new { @class = "btn btn-info" })
+                                } else {
+
+                                    if (item.SituacaoAluno == "Aprovado                                ") {
+
+                                    } else {
+                                        if (item.NotaProvaN2 == "0.00" && item.NotaProvaN3 == "0.00") {
+                                            @Html.ActionLink("Lançar N2", "Edit", new { id = item.NotaId, param1 = item.Alunos.NomeCompleto, param2 = item.DisciplinasCursos.NomeDisciplina }, new { @class = "btn btn-info" })
+                                        }
+                                        if (item.NotaProvaN3 == "0.00" && item.NotaProvaN2 != "0.00") {
+                                            @Html.ActionLink("Lançar N3", "Edit", new { id = item.NotaId, param1 = item.Alunos.NomeCompleto, param2 = item.DisciplinasCursos.NomeDisciplina }, new { @class = "btn btn-info" })
+                                        }
+                                        /*if (item.NotaProvaN2 != "0.00" && item.NotaProvaN3 != "0.00") {
+                                            @Html.ActionLink("Editar", "Edit", new { id = item.NotaId, param1 = item.AlunosPortal.NomeCompleto, param2 = item.DisciplinasCursos.NomeDisciplina }, new { @class = "btn btn-warning" })
+                                        }*/
+                                    }
+                                }
+                            }
+                            <button class="btn btn-warning" type="button" data-toggle="collapse" data-target="#M" aria-expanded="false" aria-controls="openView" title="Detalhes">
+                                +
+                            </button>
+                            <div class="collapse" id="M">
+                                <div class="card card-body">
+                                    <p>
+                                        <strong>Trabalho N1: <i>@Html.DisplayFor(modelItem => item.TrabalhoNotaN1)</i></strong> | <strong>Prova N1: <i>@Html.DisplayFor(modelItem => item.NotaProvaN1)</i></strong> |
+                                        <strong>Trabalho N2: <i>@Html.DisplayFor(modelItem => item.TrabalhoNotaN2)</i></strong> | <strong>Prova N2: <i>@Html.DisplayFor(modelItem => item.NotaProvaN2)</i></strong> |
+                                        <strong>Trabalho N3: <i>@Html.DisplayFor(modelItem => item.TrabalhoNotaN3)</i></strong> | <strong>Prova N3: <i>@Html.DisplayFor(modelItem => item.NotaProvaN3)</i></strong> |
+                                    </p>
+                                </div>
+                            </div>
+                        </td>
+                    </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+        @section styles{
+            <link href="@Url.Content("~/content/DataTables/css/dataTables.bootstrap.css")" rel="stylesheet" />
+        }
+        @section ScriptPage	{
+            <script src="@Url.Content("~/scripts/DataTables/jquery.dataTables.js")"></script>
+            <script src="@Url.Content("~/scripts/DataTables/dataTables.bootstrap4.js")"></script>
+
+        }
+
+    }
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $('a').removeClass("active");
+            $("#not").addClass("active");
+        });
+    </script>
+}

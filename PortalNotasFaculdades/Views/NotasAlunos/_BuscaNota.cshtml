@@ -1,0 +1,147 @@
+﻿@model PortalNotasFaculdades.Models.NotasAlunos
+
+@{
+    ViewBag.Title = "Notas";
+}
+
+<div class="table-responsive">
+    <span class="line"></span>
+    <h4 style="text-align: center; margin-bottom: 10px;"><strong>Disciplina: @Html.DisplayFor(model => model.DisciplinasCursos.NomeDisciplina)</strong></h4>
+    <table class="table table-bordered">
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Alunos.NomeCompleto)
+            </th>
+            <td>
+                @Html.DisplayFor(model => model.Alunos.NomeCompleto)
+            </td>
+        </tr>
+
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.DisciplinasCursos.NomeDisciplina)
+            </th>
+            <td>
+                @Html.DisplayFor(model => model.DisciplinasCursos.NomeDisciplina)
+            </td>
+        </tr>
+
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.DisciplinasCursos.SemestreDisciplina)
+            </th>
+            <td>
+                @Html.DisplayFor(model => model.DisciplinasCursos.SemestreDisciplina)
+            </td>
+        </tr>
+
+        <tr>
+            <th class="n1">
+                @Html.DisplayNameFor(model => model.TrabalhoNotaN1)
+            </th>
+            <td class="n1">
+                @Html.DisplayFor(model => model.TrabalhoNotaN1)
+            </td>
+        </tr>
+
+        <tr>
+            <th class="n1">
+                @Html.DisplayNameFor(model => model.NotaProvaN1)
+            </th>
+            <td class="n1">
+                @Html.DisplayFor(model => model.NotaProvaN1)
+            </td>
+        </tr>
+
+        <tr>
+            <th class="n2">
+                @Html.DisplayNameFor(model => model.TrabalhoNotaN2)
+            </th>
+            <td class="n2">
+                @Html.DisplayFor(model => model.TrabalhoNotaN2)
+            </td>
+        </tr>
+
+        <tr>
+            <th class="n2">
+                @Html.DisplayNameFor(model => model.NotaProvaN2)
+            </th>
+            <td class="n2">
+                @Html.DisplayFor(model => model.NotaProvaN2)
+            </td>
+        </tr>
+
+        <tr>
+            <th class="n3">
+                @Html.DisplayNameFor(model => model.TrabalhoNotaN3)
+            </th>
+            <td class="n3">
+                @Html.DisplayFor(model => model.TrabalhoNotaN3)
+            </td>
+        </tr>
+
+        <tr>
+            <th class="n3">
+                @Html.DisplayNameFor(model => model.NotaProvaN3)
+            </th>
+            <td class="n3">
+                @Html.DisplayFor(model => model.NotaProvaN3)
+            </td>
+        </tr>
+
+        <tr>
+            <th class="mFim">
+                @Html.DisplayNameFor(model => model.MediaFinal)
+            </th>
+            <td class="mFim">
+                @Html.DisplayFor(model => model.MediaFinal)
+            </td>
+        </tr>
+
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.AulasDadas)
+            </th>
+            <td>
+                @Html.DisplayFor(model => model.AulasDadas)
+            </td>
+        </tr>
+
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.QuantidadeFaltas)
+            </th>
+            <td>
+                @Html.DisplayFor(model => model.QuantidadeFaltas)
+            </td>
+        </tr>
+
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.PercentualFaltas)
+            </th>
+            <td>
+                @Html.DisplayFor(model => model.PercentualFaltas)%
+            </td>
+        </tr>
+
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.ExameFinal)
+            </th>
+            <td>
+                @Html.DisplayFor(model => model.ExameFinal)
+            </td>
+        </tr>
+
+        <tr>
+            <th class="sA">
+                @Html.DisplayNameFor(model => model.SituacaoAluno)
+            </th>
+            <td class="sA">
+                @Html.DisplayFor(model => model.SituacaoAluno)
+            </td>
+        </tr>
+
+    </table>
+</div>

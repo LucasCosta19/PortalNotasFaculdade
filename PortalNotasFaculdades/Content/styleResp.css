@@ -1,0 +1,76 @@
+﻿@media screen and (max-width: 800px) {
+    body {
+        background-size: 100% 100%!important;
+        background-repeat: repeat !important;
+    }
+    .containsMenu {                    
+        min-width: 100%!important;
+    }
+    .containsMenu .ItemMenu {
+        float: left;
+        min-width: 100%!important;
+        margin-right: 0px;
+        height: 120px;
+        margin-bottom: 10px;
+        border: 3px solid #ccc;
+        border-radius: 9px;
+    }
+
+    .homeMenu {
+        min-width: 100% !important;
+    }
+    .homeMenu .itemHome {
+        float: left;
+        min-width: 100%!important;
+        margin-right: 0px;
+        height: 120px;
+        margin-bottom: 10px;
+        border: 3px solid #ccc;
+        border-radius: 9px;
+    }
+
+    .nav-item a {
+        border-bottom: 1px solid #ccc!important;
+    }
+
+    .topRefs {
+        visibility: hidden;
+    }
+
+    .container {
+        margin-top: -40px!important;
+    }
+
+    #table .btn {
+        min-width: 100%!important;
+        margin-bottom: 10px;
+    }
+
+    .formCreate .form-group {
+        float: left;
+        width: 100% !important;
+    }
+
+    .formCreate .form-group label {
+        float: left;
+        width: 100% !important;
+        max-width: 100%;
+        color: #000;
+    }
+
+    .formCreate .form-group input, select {
+        height: 45px;
+        border-radius: 6px;
+        border: 1px solid #ccc;
+        max-width: 100%;
+        margin-bottom: 0 !important;
+        margin-top: 0 !important;
+    }
+
+    .formCreate .btn {
+        width: auto;
+        height: 40px !important;
+        border: none !important;
+    }
+
+}

@@ -1,0 +1,153 @@
+﻿@{
+    var sessao = Convert.ToString(Session["Tipo"]);
+    if (sessao == "Aluno" || sessao == "Professor")
+    {
+        Response.Write("<script>location.href='http://localhost:51948/NotasAlunosPortal';</script>");
+    }
+}
+
+@model PortalNotasFaculdades.Models.Alunos
+
+@{
+    ViewBag.Title = "Alunos";
+}
+
+<div class="topRefs">
+    <a href="~/Home">
+        <span class="sp1"><strong><i class="fa fa-home fa-2x"></i></strong></span>
+    </a>
+    <a href="~/Alunos">
+        <span class="txt sp3"><strong>Alunos</strong></span>
+    </a>
+    <a href="#">
+        <span class="txt sp4"><strong>Deletar</strong></span>
+    </a>
+</div>
+<hr />
+
+<h2 style="text-align: center;"><strong>Alunos</strong></h2>
+<hr />
+
+<h3 style="color: #f00;"><strong>Tem certeza que quer deletar esse registro?</strong></h3>
+<div>
+    <h4 style="color: darkorange;"><strong>Deletar - @Model.NomeCompleto</strong></h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Cursos.NomeCurso)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Cursos.NomeCurso)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.EmailUsuario)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.EmailUsuario)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.CpfUsuario)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CpfUsuario)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.NomeCompleto)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.NomeCompleto)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.EnderecoUsuario)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.EnderecoUsuario)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.CidadeUsuario)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CidadeUsuario)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.EstadoUsuario)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.EstadoUsuario)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.TelefoneUsuario)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.TelefoneUsuario)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.SituacaoUsuario)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.SituacaoUsuario)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.DataCadastro)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.DataCadastro)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.DataUltimoAcesso)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.DataUltimoAcesso)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Tipo)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Tipo)
+        </dd>
+
+        @Html.HiddenFor(model => model.FaculdadeId)
+        @Html.HiddenFor(model => model.EmailFaculdade)
+    </dl>
+
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Sim, Deletar" class="btn btn-danger" /> |
+            @Html.ActionLink("Não, Voltar á Lista", "Index", new { }, new { @class = "btn btn-secondary" })
+        </div>
+    }
+</div>
+<br />
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        $('a').removeClass("active");
+        $("#alun").addClass("active");
+    });
+</script>

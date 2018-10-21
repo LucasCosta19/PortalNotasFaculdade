@@ -1,0 +1,123 @@
+﻿@model PortalNotasFaculdades.Areas.AdminPortal.Models.Faculdades
+
+@{
+    ViewBag.Title = "Faculdades";
+}
+
+
+<br />
+<div class="container">
+    <h2 style="text-align: center;"><strong>Faculdades</strong></h2>
+    <hr />
+    <div>
+        <h4><strong>Detalhes - @Model.Nome</strong></h4>
+        <hr />
+        <div class="table-responsive">
+            <table class="table table-bordered table-striped">
+                <tr>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Nome)
+                    </th>
+                    <td>
+                        @Html.DisplayFor(model => model.Nome)
+                    </td>
+                </tr>
+
+                <tr>
+                    <th>
+                        @Html.DisplayNameFor(model => model.TipoPessoa)
+                    </th>
+                    <td>
+                        @Html.DisplayFor(model => model.TipoPessoa)
+                    </td>
+                </tr>
+
+                <tr>
+                    <th>
+                        @{
+                            if (Model.Cpf != null && Model.Cpf != "") {
+                                @Html.DisplayNameFor(model => model.Cpf)
+                            } else {
+                                @Html.DisplayNameFor(model => model.Cnpj)
+                            }
+                        }
+                    </th>
+                    <td>
+                        @{
+                            if (Model.Cpf != null && Model.Cpf != "") {
+                                @Html.DisplayFor(model => model.Cpf)
+                            } else {
+                                @Html.DisplayFor(model => model.Cnpj)
+                            }
+                        }
+                    </td>
+                </tr>
+
+                <tr>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Telefone)
+                    </th>
+                    <td>
+                        @Html.DisplayFor(model => model.Telefone)
+                    </td>
+                </tr>
+
+                <tr>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Email)
+                    </th>
+                    <td>
+                        @Html.DisplayFor(model => model.Email)
+                    </td>
+                </tr>
+
+                <tr>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Cep)
+                    </th>
+                    <td>
+                        @Html.DisplayFor(model => model.Cep)
+                    </td>
+                </tr>
+
+                <tr>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Estado)
+                    </th>
+                    <td>
+                        @Html.DisplayFor(model => model.Estado)
+                    </td>
+                </tr>
+
+                <tr>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Cidade)
+                    </th>
+                    <td>
+                        @Html.DisplayFor(model => model.Cidade)
+                    </td>
+                </tr>
+
+                <tr>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Endereco)
+                    </th>
+                    <td>
+                        @Html.DisplayFor(model => model.Endereco)
+                    </td>
+                </tr>
+            </table>
+        </div>
+    </div>
+    <p>
+        @Html.ActionLink("Editar", "Edit", new { id = Model.Faculdade }, new { @class = "btn btn-info" }) |
+        @Html.ActionLink("Voltar á Lista", "Index", new { }, new { @class = "btn btn-secondary" })
+    </p>
+</div>
+
+<script type="text/javascript">
+        $(document).ready(function () {
+            $('a').removeClass("active");
+            $("#inst").addClass("active");
+        });
+</script>

@@ -1,0 +1,289 @@
+﻿@{
+    var sessao = Convert.ToString(Session["Tipo"]);
+    if (sessao == "Aluno" || sessao == "Professor")
+    {
+        Response.Write("<script>location.href='http://localhost:51948/NotasAlunos';</script>");
+    }
+}
+
+
+@model PortalNotasFaculdades.Models.Professores
+
+@{
+    ViewBag.Title = "Professores";
+}
+
+<script src="~/Scripts/jquery-1.10.2.js"></script>
+<script>
+    $(document).ready(function () {
+        $("#DisciplinaUm").prop("readonly", true);
+        $("#DisciplinaDois").prop("readonly", true);
+        $("#DisciplinaTres").prop("readonly", true);
+        $("#CursoIdUm").change(function () {
+            if ($("#CursoIdUm").val() != "Select") {
+                var CountryOptions = {};
+                CountryOptions.url = "/Sample/states3";
+                CountryOptions.type = "POST";
+                CountryOptions.data = JSON.stringify({
+                    Country: $("#CursoIdUm").val()
+                });
+                CountryOptions.datatype = "json";
+                CountryOptions.contentType = "application/json";
+                CountryOptions.success = function (result) {
+                    $("#DisciplinaUm").empty();
+                    for (var i = 0; i < result.length; i++) {
+                        $("#DisciplinaUm").append("<option value = '" + result[i].Value + "' >" + result[i].Text + "</option>");
+                    }
+                    $("#DisciplinaDois").empty();
+                    for (var i = 0; i < result.length; i++) {
+                        $("#DisciplinaDois").append("<option value = '" + result[i].Value + "' >" + result[i].Text + "</option>");
+                    }
+                    $("#DisciplinaTres").empty();
+                    for (var i = 0; i < result.length; i++) {
+                        $("#DisciplinaTres").append("<option value = '" + result[i].Value + "' >" + result[i].Text + "</option>");
+                    }
+
+                    for (var i = 0; i < result.length; i++) {
+                        console.log(result[i].Value);
+                    }
+
+                    $("#DisciplinaUm").prop("readonly", false);
+                    $("#DisciplinaDois").prop("readonly", false);
+                    $("#DisciplinaTres").prop("readonly", false);
+                };
+                CountryOptions.error = function () {
+                    alert("Erro ao buscar cursos!!");
+                };
+                $.ajax(CountryOptions);
+            } else {
+                $("#DisciplinaUm").empty();
+                $("#DisciplinaUm").prop("readonly", true);
+                $("#DisciplinaDois").empty();
+                $("#DisciplinaDois").prop("readonly", true);
+                $("#DisciplinaTres").empty();
+                $("#DisciplinaTres").prop("readonly", true);
+            }
+        });
+
+
+        $("#DisciplinaQuatro").prop("readonly", true);
+        $("#DisciplinaCinco").prop("readonly", true);
+        $("#DisciplinaSeis").prop("readonly", true);
+        $("#CursoIdDois").change(function () {
+            if ($("#CursoIdDois").val() != "Select") {
+                var CountryOptions = {};
+                CountryOptions.url = "/Sample/states3";
+                CountryOptions.type = "POST";
+                CountryOptions.data = JSON.stringify({
+                    Country: $("#CursoIdDois").val()
+                });
+                CountryOptions.datatype = "json";
+                CountryOptions.contentType = "application/json";
+                CountryOptions.success = function (result) {
+                    $("#DisciplinaQuatro").empty();
+                    for (var i = 0; i < result.length; i++) {
+                        $("#DisciplinaQuatro").append("<option value = '" + result[i].Value + "' >" + result[i].Text + "</option>");
+                        console.log(result[i].Text);
+                    }
+                    $("#DisciplinaCinco").empty();
+                    for (var i = 0; i < result.length; i++) {
+                        $("#DisciplinaCinco").append("<option value = '" + result[i].Value + "' >" + result[i].Text + "</option>");
+                    }
+                    $("#DisciplinaSeis").empty();
+                    for (var i = 0; i < result.length; i++) {
+                        $("#DisciplinaSeis").append("<option value = '" + result[i].Value + "' >" + result[i].Text + "</option>");
+                    }
+
+                    for (var i = 0; i < result.length; i++) {
+                        console.log(result[i].Value);
+                    }
+                    $("#DisciplinaQuatro").prop("disabled", false);
+                    $("#DisciplinaCinco").prop("disabled", false);
+                    $("#DisciplinaSeis").prop("disabled", false);
+                };
+                CountryOptions.error = function () {
+                    alert("Erro ao buscar cursos!!");
+                };
+                $.ajax(CountryOptions);
+            } else {
+                $("#DisciplinaQuatro").empty();
+                $("#DisciplinaQuatro").prop("disabled", true);
+                $("#DisciplinaCinco").empty();
+                $("#DisciplinaCinco").prop("disabled", true);
+                $("#DisciplinaSeis").empty();
+                $("#DisciplinaSeis").prop("disabled", true);
+            }
+        });
+
+    });
+</script>
+
+<div class="topRefs">
+    <a href="~/Home">
+        <span class="sp1"><strong><i class="fa fa-home fa-2x"></i></strong></span>
+    </a>
+    <a href="~/Professores">
+        <span class="txt sp3"><strong>Professores</strong></span>
+    </a>
+    <a href="#">
+        <span class="txt sp4"><strong>Editar</strong></span>
+    </a>
+</div>
+<hr />
+
+<h2 style="text-align: center;"><strong>Professores</strong></h2>
+<hr />
+
+<div class="formCreate">
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+
+                <fieldset>
+            <legend><i class="fa fa-user"></i> <strong>Dados Pessoais - <i>@Model.NomeCompleto</i></strong></legend>
+        </fieldset>
+        <div class="">
+            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+            @Html.HiddenFor(model => model.UsuarioId)
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.EmailUsuario, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.EmailUsuario, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.EmailUsuario, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.CpfUsuario, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.CpfUsuario, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.CpfUsuario, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.NomeCompleto, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.NomeCompleto, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.NomeCompleto, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.SituacaoUsuario, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @*Html.EditorFor(model => model.SituacaoUsuario, new { htmlAttributes = new { @class = "form-control" } })*@
+                    <select name="SituacaoUsuario" id="SituacaoUsuario" class="form-control">
+                        <option value="A">Ativo</option>
+                        <option value="I">Inativo</option>
+                    </select>
+                    @Html.ValidationMessageFor(model => model.SituacaoUsuario, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.DataCadastro, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.DataCadastro, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.DataCadastro, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="formSecondary">
+                <fieldset>
+                    <legend><i class="fa fa-book"></i> <strong>Cursos Ministrados</strong></legend>
+                </fieldset>
+                <div class="formInside">
+                    @Html.LabelFor(model => model.CursoIdUm, "Curso 1", htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.Cursos.NomeCurso, new { htmlAttributes = new { @class = "form-control", @disabled = "true" } })
+                        @Html.DropDownList("CursoIdUm", ViewData["Countries"] as SelectList, new { @class = "form-control" })
+                        @Html.ValidationMessageFor(model => model.CursoIdUm, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="formInside">
+                    @Html.LabelFor(model => model.CursoIdDois, "Curso 2", htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.Cursos.NomeCurso, new { htmlAttributes = new { @class = "form-control", @disabled = "true" } })
+                        @Html.DropDownList("CursoIdDois", ViewData["CountriesTwo"] as SelectList, new { @class = "form-control" })
+                        @Html.ValidationMessageFor(model => model.CursoIdDois, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="formInside">
+                    @Html.LabelFor(model => model.DisciplinaUm, "Disciplina 1", htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.DisciplinasCursos5.NomeDisciplina, new { htmlAttributes = new { @class = "form-control", @disabled = "true" } })
+                        <select id="DisciplinaUm" name="DisciplinaUm" class="form-control" required></select>
+                    </div>
+                </div>
+
+                <div class="formInside">
+                    @Html.LabelFor(model => model.DisciplinaQuatro, "Disciplina 4", htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.DisciplinasCursos2.NomeDisciplina, new { htmlAttributes = new { @class = "form-control", @disabled = "true" } })
+                        <select id="DisciplinaQuatro" name="DisciplinaQuatro" class="form-control"></select>
+                    </div>
+                </div>
+
+                <div class="formInside">
+                    @Html.LabelFor(model => model.DisciplinaDois, "Disciplina 2", htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.DisciplinasCursos4.NomeDisciplina, new { htmlAttributes = new { @class = "form-control", @disabled = "true" } })
+                        <select id="DisciplinaDois" name="DisciplinaDois" class="form-control"></select>
+                    </div>
+                </div>
+                <div class="formInside">
+                    @Html.LabelFor(model => model.DisciplinaCinco, "Disciplina 5", htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.DisciplinasCursos1.NomeDisciplina, new { htmlAttributes = new { @class = "form-control", @disabled = "true" } })
+                        <select id="DisciplinaCinco" name="DisciplinaCinco" class="form-control"></select>
+                    </div>
+                </div>
+
+
+                <div class="formInside">
+                    @Html.LabelFor(model => model.DisciplinaTres, "Disciplina 3", htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.DisciplinasCursos3.NomeDisciplina, new { htmlAttributes = new { @class = "form-control", @disabled = "true" } })
+                        <select id="DisciplinaTres" name="DisciplinaTres" class="form-control" required></select>
+                    </div>
+                </div>
+
+                <div class="formInside">
+                    @Html.LabelFor(model => model.DisciplinaSeis, "Disciplina 6", htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.DisciplinasCursos.NomeDisciplina, new { htmlAttributes = new { @class = "form-control", @disabled = "true" } })
+                        <select id="DisciplinaSeis" name="DisciplinaSeis" class="form-control"></select>
+                    </div>
+                </div>
+            </div>
+
+            @Html.HiddenFor(model => model.Tipo, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.Tipo, "", new { @class = "text-danger" })
+
+            <input type="hidden" name="InstituicaoId" id="InstituicaoId" value="@Session["InstituicaoId"]" />
+            <input type="hidden" name="EmailInstituicao" id="EmailInstituicao" value="@Session["EmailInstituicao"]" />
+
+            <div class="form-group">
+                <div class="col-md-offset-2 col-md-10">
+                    <input type="submit" value="Salvar Alterações" class="btn btn-success" /> |
+                    @Html.ActionLink("Voltar á Lista", "Index", new { }, new { @class = "btn btn-secondary" })
+                </div>
+            </div>
+        </div>
+    }
+</div>
+
+<script src="~/Scripts/jquery-1.10.2.min.js"></script>
+<script src="~/Scripts/jquery.validate.min.js"></script>
+<script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        $('a').removeClass("active");
+        $("#prof").addClass("active");
+    });
+</script>

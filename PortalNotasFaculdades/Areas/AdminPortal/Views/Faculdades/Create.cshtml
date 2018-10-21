@@ -1,0 +1,238 @@
+﻿@model PortalNotasFaculdades.Areas.AdminPortal.Models.Faculdades
+
+@{
+    ViewBag.Title = "Nova Faculdade";
+}
+
+<br />
+<div class="container">
+    <h2 style="text-align: center;"><strong>Faculdades</strong></h2>
+    <hr />
+    @{
+        if (TempData["MessageErr"] != null)
+        {
+            <p class="alert alert-danger">@TempData["MessageErr"]</p>
+        }
+    }
+    <style>
+        /*#Nome {
+            text-transform: uppercase!important;
+        }*/
+    </style>
+    <script>
+        var dt = document.getElementById("Nome").value;
+        document.getElementById("Nome").toUpperCase();
+    </script>
+    <div class="formCreate">
+        <span id="resposta" class="text-danger"></span>
+        @using (Html.BeginForm("Create", "Faculdades", FormMethod.Post, new { onsubmit = "return verificaPessoa()" }))
+        {
+            @Html.AntiForgeryToken()
+            <div class="">
+                @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                <div class="form-group">
+                    @Html.LabelFor(model => model.Nome, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.Nome, new { htmlAttributes = new { @class = "form-control", placeholder = "Nome" } })
+                        @Html.ValidationMessageFor(model => model.Nome, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.Label("Tipo de Pessoa", htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        <select id="mySelect" name="TipoPessoa" onfocus="this.selectedIndex=0;" onblur="tipoPessoa()" class="form-control">
+                            <option value="0">Escolha Uma:</option>
+                            <option value="Física">Física</option>
+                            <option value="Jurídica">Jurídica</option>
+                        </select>
+                        @Html.ValidationMessageFor(model => model.TipoPessoa, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.Label("CPF", htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.Cpf, new { htmlAttributes = new { @class = "form-control", onkeypress = "mascara(this, '###.###.###-##')", @maxlength = "14", placeholder = "CPF" } })
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.Label("CNPJ", htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.Cnpj, new { htmlAttributes = new { @class = "form-control", onkeypress = "mascara(this, '##.###.###/####-##')", @maxlength = "18", placeholder = "CNPJ" } })
+                        @Html.ValidationMessageFor(model => model.Cnpj, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.Telefone, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.Telefone, new { htmlAttributes = new { @class = "form-control", onkeypress = "mascara(this, '## #####-####')", @maxlength = "13", placeholder = "Telefone" } })
+                        @Html.ValidationMessageFor(model => model.Telefone, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.Email, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.Email, new { htmlAttributes = new { @class = "form-control", placeholder = "E-Mail" } })
+                        @Html.ValidationMessageFor(model => model.Email, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.Cep, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.Cep, new { htmlAttributes = new { @class = "form-control", placeholder = "CEP", @maxlength = "9", onblur = "pesquisacep(this.value);", onkeypress = "mascara(this, '#####-###')" } })
+                        @Html.ValidationMessageFor(model => model.Email, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.Estado, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.Estado, new { htmlAttributes = new { @class = "form-control", placeholder = "Estado", @readonly = "true" } })
+                        @Html.ValidationMessageFor(model => model.Estado, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.Cidade, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.Cidade, new { htmlAttributes = new { @class = "form-control", placeholder = "Cidade", @readonly = "true" } })
+                        @Html.ValidationMessageFor(model => model.Cidade, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.Endereco, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.Endereco, new { htmlAttributes = new { @class = "form-control", placeholder = "Endereço" } })
+                        @Html.ValidationMessageFor(model => model.Endereco, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="formSecondary">
+                    <div class="formInside">
+                        <div class="col-md-offset-2 col-md-10">
+                            <input type="submit" value="Salvar Faculdade" class="btn btn-success" /> |
+                            @Html.ActionLink("Voltar á Lista", "Index", new { }, new { @class = "btn btn-secondary" })
+                        </div>
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+</div>
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        $('a').removeClass("active");
+        $("#inst").addClass("active");
+
+    });
+
+    function tipoPessoa() {
+        var combo = document.getElementById('mySelect');
+        var index = combo.options[combo.selectedIndex].value;
+
+        if (index == 0) {
+            alert("Escolha um Tipo de Pessoa!!");
+        }
+
+        if (index == 'Física') {
+            console.log("F");
+            $("#Cpf").prop("disabled", false);
+            $("#Cpf").prop("required", true);
+            $("#Cnpj").prop("disabled", true);
+        } else if (index == 'Jurídica') {
+            console.log("J");
+            $("#Cnpj").prop("disabled", false);
+            $("#Cnpj").prop("required", true);
+            $("#Cpf").prop("disabled", true);
+        }
+    }
+
+    function verificaPessoa() {
+        var combo = document.getElementById('mySelect');
+        var index = combo.options[combo.selectedIndex].value;
+
+        if (index == 0) {
+            alert("Escolha um Tipo de Pessoa!!");
+            return false;
+        }
+    }
+
+    function CPF() { "user_strict"; function r(r) { for (var t = null, n = 0; 9 > n; ++n)t += r.toString().charAt(n) * (10 - n); var i = t % 11; return i = 2 > i ? 0 : 11 - i } function t(r) { for (var t = null, n = 0; 10 > n; ++n)t += r.toString().charAt(n) * (11 - n); var i = t % 11; return i = 2 > i ? 0 : 11 - i } var n = "CPF Inválido", i = ""; this.gera = function () { for (var n = "", i = 0; 9 > i; ++i)n += Math.floor(9 * Math.random()) + ""; var o = r(n), a = n + "-" + o + t(n + "" + o); return a }, this.valida = function (o) { for (var a = o.replace(/\D/g, ""), u = a.substring(0, 9), f = a.substring(9, 11), v = 0; 10 > v; v++)if ("" + u + f == "" + v + v + v + v + v + v + v + v + v + v + v) return n; var c = r(u), e = t(u + "" + c); return f.toString() === c.toString() + e.toString() ? i : n } }
+
+    var CPF = new CPF();
+
+    $("#Cpf").keypress(function () {
+        $("#resposta").html(CPF.valida($(this).val()));
+    });
+
+    $("#Cpf").blur(function () {
+        $("#resposta").html(CPF.valida($(this).val()));
+    });
+
+    function limpa_formulário_cep() {
+        //Limpa valores do formulário de cep.
+        document.getElementById('Cidade').value = ("");
+        document.getElementById('Estado').value = ("");
+        document.getElementById('Endereco').value = ("");
+    }
+
+    function meu_callback(conteudo) {
+        if (!("erro" in conteudo)) {
+            //Atualiza os campos com os valores.
+            document.getElementById('Cidade').value = (conteudo.localidade);
+            document.getElementById('Estado').value = (conteudo.uf);
+            document.getElementById('Endereco').value = (conteudo.logradouro + " - " + conteudo.bairro);
+        } //end if.
+        else {
+            //CEP não Encontrado.
+            limpa_formulário_cep();
+            alert("CEP não encontrado.");
+        }
+    }
+
+    function pesquisacep(valor) {
+
+        //Nova variável "cep" somente com dígitos.
+        var cep = valor.replace(/\D/g, '');
+
+        //Verifica se campo cep possui valor informado.
+        if (cep != "") {
+
+            //Expressão regular para validar o CEP.
+            var validacep = /^[0-9]{8}$/;
+
+            //Valida o formato do CEP.
+            if (validacep.test(cep)) {
+                document.getElementById('Cidade').value = "...";
+                document.getElementById('Estado').value = "...";
+                document.getElementById('Endereco').value = "...";
+
+                //Cria um elemento javascript.
+                var script = document.createElement('script');
+
+                //Sincroniza com o callback.
+                script.src = 'https://viacep.com.br/ws/' + cep + '/json/?callback=meu_callback';
+
+                //Insere script no documento e carrega o conteúdo.
+                document.body.appendChild(script);
+
+            } //end if.
+            else {
+                //cep é inválido.
+                limpa_formulário_cep();
+                alert("Formato de CEP inválido.");
+            }
+        } //end if.
+        else {
+            //cep sem valor, limpa formulário.
+            limpa_formulário_cep();
+        }
+    };
+</script>

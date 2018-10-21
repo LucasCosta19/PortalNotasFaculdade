@@ -1,0 +1,251 @@
+﻿@{
+    var sessao = Convert.ToString(Session["Tipo"]);
+    if (sessao == "Aluno")
+    {
+        Response.Write("<script>location.href='http://localhost:51948/NotasAlunosPortal';</script>");
+    }
+}
+
+@model PortalNotasFaculdades.Models.NotasAlunos
+
+@{
+    ViewBag.Title = "Notas";
+}
+
+<script>
+    $(document).ready(function () {
+        $("#CursoId").prop("readonly", true);
+        $("#UsuarioId").change(function () {
+            if ($("#UsuarioId").val() != "Select") {
+                var CountryOptions = {};
+                CountryOptions.url = "/Sample/states2";
+                CountryOptions.type = "POST";
+                CountryOptions.data = JSON.stringify({
+                    Country: $("#UsuarioId").val()
+                });
+                CountryOptions.datatype = "json";
+                CountryOptions.contentType = "application/json";
+                CountryOptions.success = function (result) {
+                    $("#CursoId").empty();
+                    for (var i = 0; i < result.length; i++) {
+                        $("#CursoId").append("<option value = '" + result[i].Value + "' >" + result[i].Text + "</option>");
+                    }
+
+                    for (var i = 0; i < result.length; i++) {
+                        console.log(result[i].Value);
+                    }
+
+                    $("#CursoId").prop("readonly", true);
+                };
+                CountryOptions.error = function () {
+                    alert("Erro ao buscar cursos!!");
+                };
+                $.ajax(CountryOptions);
+            } else {
+                $("#CursoId").empty();
+                $("#CursoId").prop("readonly", true);
+            }
+        });
+
+
+        $("#DisciplinaNota").prop("readonly", true);
+        $("#UsuarioId").change(function () {
+            if ($("#UsuarioId").val() != "Select") {
+                var CountryOptions = {};
+                CountryOptions.url = "/Sample/states";
+                CountryOptions.type = "POST";
+                CountryOptions.data = JSON.stringify({
+                    Country: $("#UsuarioId").val()
+                });
+                CountryOptions.datatype = "json";
+                CountryOptions.contentType = "application/json";
+                CountryOptions.success = function (result) {
+                    $("#DisciplinaNota").empty();
+                    for (var i = 0; i < result.length; i++) {
+                        $("#DisciplinaNota").append("<option value = '" + result[i].Value + "' >" + result[i].Text + "</option>");
+                    }
+
+                    for (var i = 0; i < result.length; i++) {
+                        console.log(result[i].Value);
+                    }
+
+                    $("#DisciplinaNota").prop("readonly", true);
+                };
+                CountryOptions.error = function () {
+                    alert("Erro ao buscar cursos!!");
+                };
+                $.ajax(CountryOptions);
+            } else {
+                $("#DisciplinaNota").empty();
+                $("#DisciplinaNota").prop("readonly", true);
+            }
+        });
+
+    });
+</script>
+
+<div class="topRefs">
+    <a href="~/Home">
+        <span class="sp1"><strong><i class="fa fa-home fa-2x"></i></strong></span>
+    </a>
+    <a href="~/NotasAlunos">
+        <span class="txt sp3"><strong>Notas</strong></span>
+    </a>
+    <a href="#">
+        <span class="txt sp4"><strong>Novo</strong></span>
+    </a>
+</div>
+
+<hr />
+<h2 style="text-align: center;"><strong>Notas Lançadas</strong></h2>
+<hr />
+
+<div class="formCreate">
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+
+        <div class="">
+            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.UsuarioId, "Aluno", htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.DropDownList("UsuarioId", null, htmlAttributes: new { @class = "form-control", onblur = "selecionaAluno();" })
+                    @Html.ValidationMessageFor(model => model.UsuarioId, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.DisciplinaNota, "Disciplina", htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">                    
+                    <select id="DisciplinaNota" name="DisciplinaNota" class="form-control"></select>
+                    @Html.ValidationMessageFor(model => model.DisciplinaNota, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.TrabalhoNotaN1, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.TrabalhoNotaN1, new { htmlAttributes = new { @class = "form-control", @onKeyPress = "return(MascaraMoeda(this, ',', '.', event))", @maxlength = "4", onblur = "zeraNotaTrabalho();", placeholder = "Nota do Trabalho 1" } })
+                    @Html.ValidationMessageFor(model => model.TrabalhoNotaN1, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.NotaProvaN1, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.NotaProvaN1, new { htmlAttributes = new { @class = "form-control", @onKeyPress = "return(MascaraMoeda(this, ',', '.', event))", @maxlength = "4", onblur = "zeraNotaProva(); calcular(); valueF();", placeholder = "Nota da Prova 1" } })
+                    @Html.ValidationMessageFor(model => model.NotaProvaN1, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.TrabalhoNotaN2, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.TrabalhoNotaN2, new { htmlAttributes = new { @class = "form-control", @onKeyPress = "return(MascaraMoeda(this, ',', '.', event))", @maxlength = "4", @readonly = "true", @tabindex = "-1", placeholder = "Nota do Trabalho 2" } })
+                    @Html.ValidationMessageFor(model => model.TrabalhoNotaN2, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.NotaProvaN2, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.NotaProvaN2, new { htmlAttributes = new { @class = "form-control", @onKeyPress = "return(MascaraMoeda(this, ',', '.', event))", @maxlength = "4", @readonly = "true", @tabindex = "-1", placeholder = "Nota da Prova 2" } })
+                    @Html.ValidationMessageFor(model => model.NotaProvaN2, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.TrabalhoNotaN3, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.TrabalhoNotaN3, new { htmlAttributes = new { @class = "form-control", @onKeyPress = "return(MascaraMoeda(this, ',', '.', event))", @maxlength = "4", @readonly = "true", @tabindex = "-1", placeholder = "Nota do Trabalho 3" } })
+                    @Html.ValidationMessageFor(model => model.TrabalhoNotaN3, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.NotaProvaN3, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.NotaProvaN3, new { htmlAttributes = new { @class = "form-control", @onKeyPress = "return(MascaraMoeda(this, ',', '.', event))", @maxlength = "4", @readonly = "true", @tabindex = "-1", placeholder = "Nota da Prova 3" } })
+                    @Html.ValidationMessageFor(model => model.NotaProvaN3, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.MediaFinal, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.MediaFinal, new { htmlAttributes = new { @class = "form-control", @readonly = "true", @tabindex = "-1", placeholder = "Média Final" } })
+                    @Html.ValidationMessageFor(model => model.MediaFinal, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.AulasDadas, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.AulasDadas, new { htmlAttributes = new { @class = "form-control", @readonly = "true", @tabindex = "-1", placeholder = "Aulas Dadas" } })
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.QuantidadeFaltas, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.QuantidadeFaltas, new { htmlAttributes = new { @class = "form-control", @readonly = "true", @tabindex = "-1", onblur = "zeraNotaProva(); calcular(); valueF();", placeholder = "Faltas" } })
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.PercentualFaltas, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.PercentualFaltas, new { htmlAttributes = new { @class = "form-control", @readonly = "true", @tabindex = "-1", placeholder = "Percentual de Faltas" } })
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.SituacaoAluno, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.SituacaoAluno, new { htmlAttributes = new { @class = "form-control", @readonly = "true", @tabindex = "-1", placeholder = "Situação" } })
+                </div>
+            </div>
+
+            <input type="hidden" name="FaculdadeId" id="FaculdadeId" value="@Session["FaculdadeId"]" />
+            <input type="hidden" name="EmailFaculdade" id="EmailFaculdade" value="@Session["EmailFaculdade"]" />
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.CursoId, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    <select id="CursoId" name="CursoId" class="form-control" readonly="true" tabindex="-1" required></select>
+                    @Html.ValidationMessageFor(model => model.CursoId, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <input type="hidden" name="DataInsercao" id="DataInsercao" value="@DateTime.Now" />
+
+            <div class="form-group">
+                <div class="col-md-offset-2 col-md-10">
+                    <input type="submit" value="Salvar Nota" class="btn btn-success" /> |
+                    @Html.ActionLink("Voltar á Lista", "Index", new { }, new { @class = "btn btn-secondary" })
+                </div>
+            </div>
+        </div>
+    }
+</div>
+
+<script src="~/Scripts/jquery.validate.min.js"></script>
+<script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>
+<script src="~/Scripts/NotasCalc.js"></script>
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        $('a').removeClass("active");
+        $("#not").addClass("active");
+    });
+
+    function selecionaAluno() {
+        var combo = document.getElementById('UsuarioId');
+        var index = combo.options[combo.selectedIndex].value;
+
+        if (index == 0) {
+            alert("Escolha um Aluno!!");
+        }
+    }
+</script>

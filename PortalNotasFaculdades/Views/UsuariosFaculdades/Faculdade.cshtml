@@ -1,0 +1,124 @@
+﻿@{
+    var sessao = Convert.ToString(Session["Tipo"]);
+    if (sessao == "Aluno" || sessao == "Professor") {
+        Response.Write("<script>location.href='http://localhost:51948/NotasAlunos';</script>");
+    }
+}
+
+@model IEnumerable<PortalNotasFaculdades.Areas.AdminPortal.Models.Faculdades>
+
+@{
+    ViewBag.Title = "Faculdade";
+}
+
+<div class="topRefs">
+    <a href="~/Home">
+        <span class="sp1"><strong><i class="fa fa-home fa-2x"></i></strong></span>
+    </a>
+    <a href="#">
+        <span class="txt sp3"><strong>Faculdade</strong></span>
+    </a>
+</div>
+<hr />
+
+<div class="container">
+    <h2 style="text-align: center;"><strong>Faculdade</strong></h2>
+    <hr />
+    <table class="table table-striped table-bordered">
+        @foreach (var item in Model) {
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.Nome)
+                </th>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Nome)
+                </td>
+            </tr>
+
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.TipoPessoa)
+                </th>
+                <td>
+                    @Html.DisplayFor(modelItem => item.TipoPessoa)
+                </td>
+            </tr>
+
+            <tr>
+                <th>
+                    @{
+                        if (item.Cpf != null && item.Cpf != "") {
+                            @Html.DisplayNameFor(model => model.Cpf)
+                        } else {
+                            @Html.DisplayNameFor(model => model.Cnpj)
+                        }
+                    }
+                </th>
+                <td>
+                    @{
+                        if (item.Cpf != null && item.Cpf != "") {
+                            @Html.DisplayFor(modelItem => item.Cpf)
+                        } else {
+                            @Html.DisplayFor(modelItem => item.Cnpj)
+                        }
+                    }
+                </td>
+            </tr>
+
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.Telefone)
+                </th>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Telefone)
+                </td>
+            </tr>
+
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.Email)
+                </th>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Email)
+                </td>
+            </tr>
+
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.Cep)
+                </th>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Cep)
+                </td>
+            </tr>
+
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.Estado)
+                </th>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Estado)
+                </td>
+            </tr>
+
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.Cidade)
+                </th>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Cidade)
+                </td>
+            </tr>
+
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.Endereco)
+                </th>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Endereco)
+                </td>
+            </tr>
+        }
+    </table>
+</div>
+

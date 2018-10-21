@@ -1,0 +1,75 @@
+﻿@{
+    var sessao = Convert.ToString(Session["Tipo"]);
+    if (sessao == "Aluno" || sessao == "Professor")
+    {
+        Response.Write("<script>location.href='http://localhost:51948/NotasAlunosPortal';</script>");
+    }
+}
+
+@model PortalNotasFaculdades.Models.Cursos
+
+@{
+    ViewBag.Title = "Cursos";
+}
+
+<div class="topRefs">
+    <a href="~/Home">
+        <span class="sp1"><strong><i class="fa fa-home fa-2x"></i></strong></span>
+    </a>
+    <a href="~/Cursos">
+        <span class="txt sp3"><strong>Cursos</strong></span>
+    </a>
+    <a href="#">
+        <span class="txt sp4"><strong>Detalhes</strong></span>
+    </a>
+</div>
+<hr />
+
+<h2 style="text-align: center;"><strong>Cursos da Faculdade</strong></h2>
+<hr />
+
+<div>
+    <h4><strong>Detalhes - @Model.NomeCurso</strong></h4>
+    <hr />
+    <table class="table table-bordered table-striped">
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.SemestresQuant)
+            </th>
+            <td>
+                @Html.DisplayFor(model => model.SemestresQuant)
+            </td>
+        </tr>
+
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.NomeCurso)
+            </th>
+
+            <td>
+                @Html.DisplayFor(model => model.NomeCurso)
+            </td>
+        </tr>
+
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.HorasAulas)
+            </th>
+            <td>
+                @Html.DisplayFor(model => model.HorasAulas)
+            </td>
+        </tr>
+    </table>
+
+</div>
+<p>
+    @Html.ActionLink("Editar", "Edit", new { id = Model.CursoId }, new { @class = "btn btn-info" }) |
+    @Html.ActionLink("Voltar á Lista", "Index", new { }, new { @class = "btn btn-secondary" })
+</p>
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        $('a').removeClass("active");
+        $("#curso").addClass("active");
+    });
+</script>

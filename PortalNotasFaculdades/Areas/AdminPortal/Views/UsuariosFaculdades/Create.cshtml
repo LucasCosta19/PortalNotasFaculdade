@@ -1,0 +1,153 @@
+﻿@model PortalNotasFaculdades.Areas.AdminPortal.Models.UsuariosFaculdades
+
+@{
+    ViewBag.Title = "Novo Usuário";
+}
+
+<script>
+    $(document).ready(function () {
+        $("#EmailFaculdade").prop("readonly", true);
+        $("#FaculdadeId").change(function () {
+            if ($("#FaculdadeId").val() != "Select") {
+                var CountryOptions = {};
+                CountryOptions.url = "/Sample/faculdades";
+                CountryOptions.type = "POST";
+                CountryOptions.data = JSON.stringify({
+                    Country: $("#FaculdadeId").val()
+                });
+                CountryOptions.datatype = "json";
+                CountryOptions.contentType = "application/json";
+                CountryOptions.success = function (result) {
+                    $("#EmailFaculdade").empty();
+                    for (var i = 0; i < result.length; i++) {
+                        $("#EmailFaculdade").append("<option value = '" + result[i].Value + "' >" + result[i].Text + "</option>");
+                    }
+
+                    for (var i = 0; i < result.length; i++) {
+                        console.log(result[i].Value);
+                    }
+
+                    $("#EmailFaculdade").prop("readonly", true);
+                };
+                CountryOptions.error = function () {
+                    alert("Erro ao buscar cursos!!");
+                };
+                $.ajax(CountryOptions);
+            } else {
+                $("#EmailFaculdade").empty();
+                $("#EmailFaculdade").prop("readonly", true);
+            }
+        });
+
+    });
+</script>
+
+<br />
+<div class="container">
+    <h2 style="text-align: center;"><strong>Usuários das Faculdades</strong></h2>
+    <hr />
+    <div class="formCreate">
+        @using (Html.BeginForm("Create", "UsuariosFaculdades", FormMethod.Post, new { onsubmit = "return nomeFaculdade()" }))
+        {
+            @Html.AntiForgeryToken()
+        <div class="">
+            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+            <div class="form-group">
+                @Html.LabelFor(model => model.NomeUsuario, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.NomeUsuario, new { htmlAttributes = new { @class = "form-control", placeholder = "Usuário" } })
+                    @Html.ValidationMessageFor(model => model.NomeUsuario, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.EmailUsuario, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.EmailUsuario, new { htmlAttributes = new { @class = "form-control", placeholder = "E-Mail" } })
+                    @Html.ValidationMessageFor(model => model.EmailUsuario, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.SenhaUsuario, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.SenhaUsuario, new { htmlAttributes = new { @class = "form-control", placeholder = "Senha" } })
+                    @Html.ValidationMessageFor(model => model.SenhaUsuario, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.NomeCompleto, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.NomeCompleto, new { htmlAttributes = new { @class = "form-control", placeholder = "Nome Completo", onblur = "pegaToken();" } })
+                    @Html.ValidationMessageFor(model => model.NomeCompleto, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.DataCadastro, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.DataCadastro, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.DataCadastro, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.Tipo, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @*Html.EditorFor(model => model.Tipo, new { htmlAttributes = new { @class = "form-control" } })*@
+                    <select name="Tipo" class="form-control" id="Tipo" readonly>
+                        <option value="Master">Master</option>
+                    </select>
+                    @Html.ValidationMessageFor(model => model.Tipo, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.Label("Nome Faculdade", htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.DropDownList("FaculdadeId", null, htmlAttributes: new { @class = "form-control" })
+                    @Html.ValidationMessageFor(model => model.FaculdadeId, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.Label("E-Mail Faculdade", htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @*Html.DropDownList("EmailInstituicao", ViewData["InstituicoesEmail"] as SelectList, new { @class = "form-control" })
+                <select name="EmailInstituicao" class="form-control" id="EmailInstituicao"></select>*@
+                    <select id="EmailFaculdade" name="EmailFaculdade" class="form-control" readonly></select>
+                    @Html.ValidationMessageFor(model => model.EmailFaculdade, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                <div class="col-md-offset-2 col-md-10">
+                    <input type="submit" value="Salvar Usuário" class="btn btn-success" /> |
+                    @Html.ActionLink("Voltar á Lista", "Index", new { }, new { @class = "btn btn-secondary" })
+                </div>
+            </div>
+        </div>
+        }
+    </div>
+</div>
+
+<script src="~/Scripts/jquery.validate.min.js"></script>
+<script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        $('a').removeClass("active");
+        $("#users").addClass("active");
+    });
+
+    function nomeFaculdade() {
+        var combo = document.getElementById('FaculdadeId');
+        var index = combo.options[combo.selectedIndex].value;
+
+        if (index == 0) {
+            alert("Escolha uma Faculdade!!");
+            return false;
+        }
+    }
+</script>

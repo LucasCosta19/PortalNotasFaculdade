@@ -1,0 +1,161 @@
+﻿@{
+    var sessao = Convert.ToString(Session["Tipo"]);
+    if (sessao == "Aluno" || sessao == "Professor")
+    {
+        Response.Write("<script>location.href='http://localhost:51948/NotasAlunosPortal';</script>");
+    }
+}
+
+@model PortalNotasFaculdades.Models.NotasAlunos
+
+@{
+    ViewBag.Title = "Notas";
+}
+
+<div class="topRefs">
+    <a href="~/Home">
+        <span class="sp1"><strong><i class="fa fa-home fa-2x"></i></strong></span>
+    </a>
+    <a href="~/NotasAlunos">
+        <span class="txt sp3"><strong>Notas</strong></span>
+    </a>
+    <a href="#">
+        <span class="txt sp4"><strong>Deletar</strong></span>
+    </a>
+</div>
+<hr />
+
+<h2 style="text-align: center;"><strong>Notas Lançadas</strong></h2>
+<hr />
+
+<h3 style="color: #f00;"><strong>Tem certeza que quer deletar esse registro?</strong></h3>
+<div>
+    <h4 style="color: darkorange;"><strong>Deletar - Nota de @Model.Alunos.NomeCompleto</strong></h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Alunos.EmailUsuario)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Alunos.EmailUsuario)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.DisciplinasCursos.NomeDisciplina)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.DisciplinasCursos.NomeDisciplina)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.TrabalhoNotaN1)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.TrabalhoNotaN1)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.NotaProvaN1)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.NotaProvaN1)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.TrabalhoNotaN2)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.TrabalhoNotaN2)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.NotaProvaN2)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.NotaProvaN2)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.TrabalhoNotaN3)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.TrabalhoNotaN3)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.NotaProvaN3)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.NotaProvaN3)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.MediaFinal)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.MediaFinal)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.AulasDadas)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.AulasDadas)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.QuantidadeFaltas)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.QuantidadeFaltas)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.PercentualFaltas)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.PercentualFaltas)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.SituacaoAluno)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.SituacaoAluno)
+        </dd>
+
+        @Html.HiddenFor(model => model.FaculdadeId)
+        @Html.HiddenFor(model => model.EmailFaculdade)
+
+    </dl>
+
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Sim, Deletar" class="btn btn-danger" /> |
+            @Html.ActionLink("Não, Voltar á Lista", "Index", new { }, new { @class = "btn btn-secondary" })
+        </div>
+    }
+</div>
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        $('a').removeClass("active");
+        $("#not").addClass("active");
+    });
+</script>

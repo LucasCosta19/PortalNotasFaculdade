@@ -1,0 +1,486 @@
+﻿@{
+    var sessao = Convert.ToString(Session["Tipo"]);
+    if (sessao == "Aluno") {
+        Response.Write("<script>location.href='http://localhost:51948/NotasAlunosPortal';</script>");
+    }
+}
+
+
+@model PortalNotasFaculdades.Models.NotasAlunos
+
+@{
+    ViewBag.Title = "Notas";
+}
+
+<div class="topRefs">
+    <a href="~/Home">
+        <span class="sp1"><strong><i class="fa fa-home fa-2x"></i></strong></span>
+    </a>
+    <a href="~/NotasAlunos">
+        <span class="txt sp3"><strong>Notas</strong></span>
+    </a>
+    <a href="#">
+        <span class="txt sp4"><strong>Editar</strong></span>
+    </a>
+</div>
+<hr />
+
+<h2 style="text-align: center;"><strong>Notas Lançadas</strong></h2>
+<hr />
+
+@{
+    if (sessao == "Master") {
+        <div class="formCreate">
+            @using (Html.BeginForm()) {
+                @Html.AntiForgeryToken()
+
+                <div class="">
+                    <h4><strong>Lançamento de Nota - @Model.Alunos.NomeCompleto</strong></h4>
+                    <hr />
+                    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                    @Html.HiddenFor(model => model.NotaId)
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.UsuarioId, "Aluno", htmlAttributes: new { @class = "control-label col-md-2" })
+                        <div class="col-md-10">
+                            @Html.DropDownList("UsuarioId", null, htmlAttributes: new { @class = "form-control", @readonly = "true" })
+                            @Html.ValidationMessageFor(model => model.UsuarioId, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.DisciplinaNota, "Disciplina", htmlAttributes: new { @class = "control-label col-md-2" })
+                        <div class="col-md-10">
+                            @Html.DropDownList("DisciplinaNota", null, htmlAttributes: new { @class = "form-control", @readonly = "true" })
+                            @Html.ValidationMessageFor(model => model.DisciplinaNota, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.TrabalhoNotaN1, htmlAttributes: new { @class = "control-label col-md-2" })
+                        <div class="col-md-10">
+                            @{
+                                if (Model.TrabalhoNotaN1 != "0.00") {
+                                    @Html.EditorFor(model => model.TrabalhoNotaN1, new { htmlAttributes = new { @class = "form-control", @onKeyPress = "return(MascaraMoeda(this, ',', '.', event))", @maxlength = "4" } })
+                                } else {
+                                    @Html.EditorFor(model => model.TrabalhoNotaN1, new { htmlAttributes = new { @class = "form-control", @onKeyPress = "return(MascaraMoeda(this, ',', '.', event))", @maxlength = "4" } })
+                                }
+                            }
+                            @Html.ValidationMessageFor(model => model.TrabalhoNotaN1, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.NotaProvaN1, htmlAttributes: new { @class = "control-label col-md-2" })
+                        <div class="col-md-10">
+                            @{
+                                if (Model.NotaProvaN1 != "0.00") {
+                                    @Html.EditorFor(model => model.NotaProvaN1, new { htmlAttributes = new { @class = "form-control", @onKeyPress = "return(MascaraMoeda(this, ',', '.', event))", @maxlength = "4" } })
+                                } else {
+                                    @Html.EditorFor(model => model.NotaProvaN1, new { htmlAttributes = new { @class = "form-control", @onKeyPress = "return(MascaraMoeda(this, ',', '.', event))", @maxlength = "4" } })
+                                }
+                            }
+                            @Html.ValidationMessageFor(model => model.NotaProvaN1, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.TrabalhoNotaN2, htmlAttributes: new { @class = "control-label col-md-2" })
+                        <div class="col-md-10">
+                            @{
+                                if (Model.TrabalhoNotaN2 != "0.00") {
+                                    @Html.EditorFor(model => model.TrabalhoNotaN2, new { htmlAttributes = new { @class = "form-control", @onKeyPress = "return(MascaraMoeda(this, ',', '.', event))", @maxlength = "4" } })
+                                } else {
+                                    @Html.EditorFor(model => model.TrabalhoNotaN2, new { htmlAttributes = new { @class = "form-control", @onKeyPress = "return(MascaraMoeda(this, ',', '.', event))", @maxlength = "4" } })
+                                }
+                            }
+                            @Html.ValidationMessageFor(model => model.TrabalhoNotaN2, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.NotaProvaN2, htmlAttributes: new { @class = "control-label col-md-2" })
+                        <div class="col-md-10">
+                            @{
+                                if (Model.NotaProvaN2 != "0.00") {
+                                    @Html.EditorFor(model => model.NotaProvaN2, new { htmlAttributes = new { @class = "form-control", @onKeyPress = "return(MascaraMoeda(this, ',', '.', event))", @maxlength = "4" } })
+                                } else {
+                                    @Html.EditorFor(model => model.NotaProvaN2, new { htmlAttributes = new { @class = "form-control", @onKeyPress = "return(MascaraMoeda(this, ',', '.', event))", @maxlength = "4" } })
+                                }
+                            }
+                            @Html.ValidationMessageFor(model => model.NotaProvaN2, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.TrabalhoNotaN3, htmlAttributes: new { @class = "control-label col-md-2" })
+                        <div class="col-md-10">
+                            @{
+                                if (Model.SituacaoAluno != "Exame Final                             ") {
+                                    if (Model.TrabalhoNotaN2 == "0.00") {
+                                        @Html.EditorFor(model => model.TrabalhoNotaN3, new { htmlAttributes = new { @class = "form-control", @onKeyPress = "return(MascaraMoeda(this, ',', '.', event))", @maxlength = "4" } })
+                                    } else {
+                                        @Html.EditorFor(model => model.TrabalhoNotaN3, new { htmlAttributes = new { @class = "form-control", @onKeyPress = "return(MascaraMoeda(this, ',', '.', event))", @maxlength = "4" } })
+                                    }
+                                } else {
+                                    @Html.EditorFor(model => model.TrabalhoNotaN3, new { htmlAttributes = new { @class = "form-control", @onKeyPress = "return(MascaraMoeda(this, ',', '.', event))", @maxlength = "4" } })
+                                }
+                            }
+                            @Html.ValidationMessageFor(model => model.TrabalhoNotaN3, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.NotaProvaN3, htmlAttributes: new { @class = "control-label col-md-2" })
+                        <div class="col-md-10">
+                            @{
+                                if (Model.SituacaoAluno != "Exame Final                             ") {
+                                    if (Model.NotaProvaN2 == "0.00") {
+                                        @Html.EditorFor(model => model.NotaProvaN3, new { htmlAttributes = new { @class = "form-control", @onKeyPress = "return(MascaraMoeda(this, ',', '.', event))", @maxlength = "4" } })
+                                    } else {
+                                        @Html.EditorFor(model => model.NotaProvaN3, new { htmlAttributes = new { @class = "form-control", @onKeyPress = "return(MascaraMoeda(this, ',', '.', event))", @maxlength = "4" } })
+                                    }
+                                } else {
+                                    @Html.EditorFor(model => model.NotaProvaN3, new { htmlAttributes = new { @class = "form-control", @onKeyPress = "return(MascaraMoeda(this, ',', '.', event))", @maxlength = "4" } })
+                                }
+                            }
+                            @Html.ValidationMessageFor(model => model.NotaProvaN3, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.MediaFinal, htmlAttributes: new { @class = "control-label col-md-2" })
+                        <div class="col-md-10">
+                            @Html.EditorFor(model => model.MediaFinal, new { htmlAttributes = new { @class = "form-control", @readonly = "true" } })
+                            @Html.ValidationMessageFor(model => model.MediaFinal, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.AulasDadas, htmlAttributes: new { @class = "control-label col-md-2" })
+                        <div class="col-md-10">
+                            @{
+                                if (Model.SituacaoAluno != "Exame Final                             ") {
+                                    if (Model.NotaProvaN2 != "0.00") {
+                                        @Html.EditorFor(model => model.AulasDadas, new { htmlAttributes = new { @class = "form-control" } })
+                                    } else {
+                                        @Html.EditorFor(model => model.AulasDadas, new { htmlAttributes = new { @class = "form-control" } })
+                                    }
+                                } else {
+                                    @Html.EditorFor(model => model.AulasDadas, new { htmlAttributes = new { @class = "form-control" } })
+                                }
+                            }
+                            @Html.ValidationMessageFor(model => model.AulasDadas, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.QuantidadeFaltas, htmlAttributes: new { @class = "control-label col-md-2" })
+                        <div class="col-md-10">
+                            @{
+                                if (Model.SituacaoAluno != "Exame Final                             ") {
+                                    if (Model.NotaProvaN2 != "0.00") {
+                                        @Html.EditorFor(model => model.QuantidadeFaltas, new { htmlAttributes = new { @class = "form-control" } })
+                                    } else {
+                                        @Html.EditorFor(model => model.QuantidadeFaltas, new { htmlAttributes = new { @class = "form-control" } })
+                                    }
+                                } else {
+                                    @Html.EditorFor(model => model.QuantidadeFaltas, new { htmlAttributes = new { @class = "form-control" } })
+                                }
+                            }
+                            @Html.ValidationMessageFor(model => model.QuantidadeFaltas, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.PercentualFaltas, htmlAttributes: new { @class = "control-label col-md-2" })
+                        <div class="col-md-10">
+                            @Html.EditorFor(model => model.PercentualFaltas, new { htmlAttributes = new { @class = "form-control", @tabindex = "-1", @readonly = "true" } })
+                            @Html.ValidationMessageFor(model => model.PercentualFaltas, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                    @{
+                        if (Model.SituacaoAluno == "Exame Final                             ") {
+                            <div class="form-group">
+                                @Html.LabelFor(model => model.ExameFinal, htmlAttributes: new { @class = "control-label col-md-2" })
+                                <div class="col-md-10">
+                                    @Html.EditorFor(model => model.ExameFinal, new { htmlAttributes = new { @class = "form-control", @onKeyPress = "return(MascaraMoeda(this, ',', '.', event))", @maxlength = "4", onblur = "notaExame();" } })
+                                    @Html.ValidationMessageFor(model => model.ExameFinal, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+                        } else {
+                            @Html.HiddenFor(model => model.ExameFinal)
+                        }
+                    }
+
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.SituacaoAluno, htmlAttributes: new { @class = "control-label col-md-2" })
+                        <div class="col-md-10">
+                            @Html.EditorFor(model => model.SituacaoAluno, new { htmlAttributes = new { @class = "form-control", @readonly = "true", @tabindex = "-1" } })
+                            @Html.ValidationMessageFor(model => model.SituacaoAluno, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+
+                    <input type="hidden" name="CursoId" id="CursoId" value="@Model.CursoId" />
+                    <input type="hidden" name="InstituicaoId" id="InstituicaoId" value="@Session["InstituicaoId"]" />
+                    <input type="hidden" name="EmailInstituicao" id="EmailInstituicao" value="@Session["EmailInstituicao"]" />
+
+                    <div class="form-group">
+                        <div class="col-md-offset-2 col-md-10">
+                            <input type="submit" value="Salvar Alteração" class="btn btn-success" />
+                        </div>
+                    </div>
+                </div>
+            }
+        </div>
+    }
+}
+
+@{
+    if (sessao == "Professor") {
+        if (Model.SituacaoAluno == "Aprovado                                " || Model.SituacaoAluno == "Reprovado" || Model.SituacaoAluno == "Reprovado por Falta") {
+            Response.Write("<script>alert('Não é Possível Alterar as Notas Desse Aluno!');location.href='http://localhost:51948/NotasAlunos';</script>");
+        }
+
+        var curso1 = Convert.ToInt16(Session["CursoIdUm"]);
+        var curso2 = Convert.ToInt16(Session["CursoIdDois"]);
+        var cursoAluno = Model.DisciplinasCursos.CursoId ;
+
+        if(curso1 != cursoAluno && curso2 != cursoAluno) {
+            Response.Write("<script>alert('Esse Aluno Não Faz Parte do Seu Curso!!!!');location.href='http://localhost:51948/NotasAlunos';</script>");
+        }
+
+        <div class="formCreate">
+            @using (Html.BeginForm()) {
+                @Html.AntiForgeryToken()
+
+                <div class="">
+                    <h4><strong>Lançamento de Nota - @Model.Alunos.NomeCompleto</strong></h4>
+                    <hr />
+                    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                    @Html.HiddenFor(model => model.NotaId)
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.UsuarioId, "Aluno", htmlAttributes: new { @class = "control-label col-md-2" })
+                        <div class="col-md-10">
+                            @Html.DropDownList("UsuarioId", null, htmlAttributes: new { @class = "form-control", @readonly = "true" })
+                            @Html.ValidationMessageFor(model => model.UsuarioId, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.DisciplinaNota, "Disciplina", htmlAttributes: new { @class = "control-label col-md-2" })
+                        <div class="col-md-10">
+                            @Html.DropDownList("DisciplinaNota", null, htmlAttributes: new { @class = "form-control", @readonly = "true" })
+                            @Html.ValidationMessageFor(model => model.DisciplinaNota, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.TrabalhoNotaN1, htmlAttributes: new { @class = "control-label col-md-2" })
+                        <div class="col-md-10">
+                            @{
+                                if (Model.TrabalhoNotaN1 != "0.00") {
+                                    @Html.EditorFor(model => model.TrabalhoNotaN1, new { htmlAttributes = new { @class = "form-control", @readonly = "true", @onKeyPress = "return(MascaraMoeda(this, ',', '.', event))", @maxlength = "4" } })
+                                } else {
+                                    @Html.EditorFor(model => model.TrabalhoNotaN1, new { htmlAttributes = new { @class = "form-control", @onKeyPress = "return(MascaraMoeda(this, ',', '.', event))", @maxlength = "4" } })
+                                }
+                            }
+                            @Html.ValidationMessageFor(model => model.TrabalhoNotaN1, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.NotaProvaN1, htmlAttributes: new { @class = "control-label col-md-2" })
+                        <div class="col-md-10">
+                            @{
+                                if (Model.NotaProvaN1 != "0.00") {
+                                    @Html.EditorFor(model => model.NotaProvaN1, new { htmlAttributes = new { @class = "form-control", @readonly = "true", @onKeyPress = "return(MascaraMoeda(this, ',', '.', event))", @maxlength = "4", @tabindex = "-1" } })
+                                } else {
+                                    @Html.EditorFor(model => model.NotaProvaN1, new { htmlAttributes = new { @class = "form-control", @onKeyPress = "return(MascaraMoeda(this, ',', '.', event))", @maxlength = "4", @tabindex = "-1" } })
+                                }
+                            }
+                            @Html.ValidationMessageFor(model => model.NotaProvaN1, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.TrabalhoNotaN2, htmlAttributes: new { @class = "control-label col-md-2" })
+                        <div class="col-md-10">
+                            @{
+                                if (Model.TrabalhoNotaN2 != "0.00") {
+                                    @Html.EditorFor(model => model.TrabalhoNotaN2, new { htmlAttributes = new { @class = "form-control", @readonly = "true", @onKeyPress = "return(MascaraMoeda(this, ',', '.', event))", @maxlength = "4" } })
+                                } else {
+                                    @Html.EditorFor(model => model.TrabalhoNotaN2, new { htmlAttributes = new { @class = "form-control", @onKeyPress = "return(MascaraMoeda(this, ',', '.', event))", @maxlength = "4" } })
+                                }
+                            }
+                            @Html.ValidationMessageFor(model => model.TrabalhoNotaN2, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.NotaProvaN2, htmlAttributes: new { @class = "control-label col-md-2" })
+                        <div class="col-md-10">
+                            @{
+                                if (Model.NotaProvaN2 != "0.00") {
+                                    @Html.EditorFor(model => model.NotaProvaN2, new { htmlAttributes = new { @class = "form-control", onblur = "calcular();", @readonly = "true", @onKeyPress = "return(MascaraMoeda(this, ',', '.', event))", @maxlength = "4", @tabindex = "-1" } })
+                                } else {
+                                    @Html.EditorFor(model => model.NotaProvaN2, new { htmlAttributes = new { @class = "form-control", onblur = "calcular();", @onKeyPress = "return(MascaraMoeda(this, ',', '.', event))", @maxlength = "4" } })
+                                }
+                            }
+                            @Html.ValidationMessageFor(model => model.NotaProvaN2, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.TrabalhoNotaN3, htmlAttributes: new { @class = "control-label col-md-2" })
+                        <div class="col-md-10">
+                            @{
+                                if (Model.SituacaoAluno != "Exame Final                             ") {
+                                    if (Model.TrabalhoNotaN2 == "0.00") {
+                                        @Html.EditorFor(model => model.TrabalhoNotaN3, new { htmlAttributes = new { @class = "form-control", @readonly = "true", @onKeyPress = "return(MascaraMoeda(this, ',', '.', event))", @maxlength = "4", @tabindex = "-1" } })
+                                    } else {
+                                        @Html.EditorFor(model => model.TrabalhoNotaN3, new { htmlAttributes = new { @class = "form-control", @onKeyPress = "return(MascaraMoeda(this, ',', '.', event))", @maxlength = "4", @tabindex = "-1" } })
+                                    }
+                                    if (Model.TrabalhoNotaN3 != "0.00") {
+                                        @Html.EditorFor(model => model.TrabalhoNotaN3, new { htmlAttributes = new { @class = "form-control", @readonly = "true", @onKeyPress = "return(MascaraMoeda(this, ',', '.', event))", @maxlength = "4", @tabindex = "-1" } })
+                                    }
+                                } else {
+                                    @Html.EditorFor(model => model.TrabalhoNotaN3, new { htmlAttributes = new { @class = "form-control", @readonly = "true", @onKeyPress = "return(MascaraMoeda(this, ',', '.', event))", @maxlength = "4", @tabindex = "-1" } })
+                                }
+                            }
+                            @Html.ValidationMessageFor(model => model.TrabalhoNotaN3, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.NotaProvaN3, htmlAttributes: new { @class = "control-label col-md-2" })
+                        <div class="col-md-10">
+                            @{
+                                if (Model.SituacaoAluno != "Exame Final                             ") {
+                                    if (Model.NotaProvaN2 == "0.00") {
+                                        @Html.EditorFor(model => model.NotaProvaN3, new { htmlAttributes = new { @class = "form-control", onblur = "calcular();", @onKeyPress = "return(MascaraMoeda(this, ',', '.', event))", @maxlength = "4", @readonly = "true", @tabindex = "-1" } })
+                                    } else {
+                                        @Html.EditorFor(model => model.NotaProvaN3, new { htmlAttributes = new { @class = "form-control", onblur = "calcular();", @onKeyPress = "return(MascaraMoeda(this, ',', '.', event))", @maxlength = "4" } })
+                                    }
+                                    if (Model.NotaProvaN3 != "0.00") {
+                                        @Html.EditorFor(model => model.NotaProvaN3, new { htmlAttributes = new { @class = "form-control", onblur = "calcular();", @readonly = "true", @onKeyPress = "return(MascaraMoeda(this, ',', '.', event))", @maxlength = "4", @tabindex = "-1" } })
+                                    }
+                                } else {
+                                    @Html.EditorFor(model => model.NotaProvaN3, new { htmlAttributes = new { @class = "form-control", onblur = "calcular();", @readonly = "true", @onKeyPress = "return(MascaraMoeda(this, ',', '.', event))", @maxlength = "4", @tabindex = "-1" } })
+                                }
+                            }
+                            @Html.ValidationMessageFor(model => model.NotaProvaN3, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.MediaFinal, htmlAttributes: new { @class = "control-label col-md-2" })
+                        <div class="col-md-10">
+                            @Html.EditorFor(model => model.MediaFinal, new { htmlAttributes = new { @class = "form-control", @readonly = "true", @tabindex = "-1" } })
+                            @Html.ValidationMessageFor(model => model.MediaFinal, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.AulasDadas, htmlAttributes: new { @class = "control-label col-md-2" })
+                        <div class="col-md-10">
+                            @{
+                                if (Model.SituacaoAluno != "Exame Final                             ") {
+                                    if (Model.NotaProvaN2 != "0.00") {
+                                        @Html.EditorFor(model => model.AulasDadas, new { htmlAttributes = new { @class = "form-control" } })
+                                    } else {
+                                        @Html.EditorFor(model => model.AulasDadas, new { htmlAttributes = new { @class = "form-control", @readonly = "true", @tabindex = "-1" } })
+                                    }
+                                } else {
+                                    @Html.EditorFor(model => model.AulasDadas, new { htmlAttributes = new { @class = "form-control", @readonly = "true", @tabindex = "-1" } })
+                                }
+                            }
+                            @Html.ValidationMessageFor(model => model.AulasDadas, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.QuantidadeFaltas, htmlAttributes: new { @class = "control-label col-md-2" })
+                        <div class="col-md-10">
+                            @{
+                                if (Model.SituacaoAluno != "Exame Final                             ") {
+                                    if (Model.NotaProvaN2 != "0.00") {
+                                        @Html.EditorFor(model => model.QuantidadeFaltas, new { htmlAttributes = new { @class = "form-control", onblur = "frequencia(); situacaoAluno();" } })
+                                    } else {
+                                        @Html.EditorFor(model => model.QuantidadeFaltas, new { htmlAttributes = new { @class = "form-control", @tabindex = "-1", @readonly = "true", onblur = "frequencia(); situacaoAluno();" } })
+                                    }
+                                } else {
+                                    @Html.EditorFor(model => model.QuantidadeFaltas, new { htmlAttributes = new { @class = "form-control", @tabindex = "-1", @readonly = "true", onblur = "frequencia(); situacaoAluno();" } })
+                                }
+                            }
+                            @Html.ValidationMessageFor(model => model.QuantidadeFaltas, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.PercentualFaltas, htmlAttributes: new { @class = "control-label col-md-2" })
+                        <div class="col-md-10">
+                            @Html.EditorFor(model => model.PercentualFaltas, new { htmlAttributes = new { @class = "form-control", @tabindex = "-1", @readonly = "true" } })
+                            @Html.ValidationMessageFor(model => model.PercentualFaltas, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                    @{
+                        if (Model.SituacaoAluno == "Exame Final                             ") {
+                            <div class="form-group">
+                                @Html.LabelFor(model => model.ExameFinal, htmlAttributes: new { @class = "control-label col-md-2" })
+                                <div class="col-md-10">
+                                    @Html.EditorFor(model => model.ExameFinal, new { htmlAttributes = new { @class = "form-control", @onKeyPress = "return(MascaraMoeda(this, ',', '.', event))", @maxlength = "4", onblur = "notaExame();" } })
+                                    @Html.ValidationMessageFor(model => model.ExameFinal, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+                        } else {
+                            @Html.HiddenFor(model => model.ExameFinal)
+                        }
+                    }
+
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.SituacaoAluno, htmlAttributes: new { @class = "control-label col-md-2" })
+                        <div class="col-md-10">
+                            @Html.EditorFor(model => model.SituacaoAluno, new { htmlAttributes = new { @class = "form-control", @readonly = "true", @tabindex = "-1" } })
+                            @Html.ValidationMessageFor(model => model.SituacaoAluno, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+
+                    @*Html.HiddenFor(model => model.CursoId)*@
+                    <input type="hidden" name="CursoId" id="CursoId" value="@Model.DisciplinasCursos.CursoId" />
+                    <input type="hidden" name="FaculdadeId" id="FaculdadeId" value="@Session["FaculdadeId"]" />
+                    <input type="hidden" name="EmailFaculdade" id="EmailFaculdade" value="@Session["EmailFaculdade"]" />
+
+                    <div class="form-group">
+                        <div class="col-md-offset-2 col-md-10">
+                            <input type="submit" value="Salvar Lançamento" class="btn btn-success" />
+                        </div>
+                    </div>
+                </div>
+            }
+        </div>
+    }
+}
+
+<div>
+    @Html.ActionLink("Voltar á Lista", "Index", new { }, new { @class = "btn btn-secondary" })
+</div>
+
+<script src="~/Scripts/jquery.validate.min.js"></script>
+<script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>
+<script src="~/Scripts/NotasCalc.js"></script>
+
+<script>
+    $(document).ready(function () {
+        $('#AulasDadas, #QuantidadeFaltas').on('blur', function () {
+            frequencia();
+            situacaoAluno();
+        });
+
+        $('#NotaProvaN2, #NotaProvaN3').on('blur', function () {
+            calcular();
+        });
+
+        $('a').removeClass("active");
+        $("#not").addClass("active");
+    });
+</script>

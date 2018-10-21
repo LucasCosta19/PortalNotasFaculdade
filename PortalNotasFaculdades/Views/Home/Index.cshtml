@@ -1,0 +1,134 @@
+﻿@{
+    ViewBag.Title = "Home";
+    if (Session["UsuarioId"] == null)
+    {
+        Response.Redirect("~/Login/Index");
+    }
+}
+<style>
+    h1 input {
+        font-size: 22px !important;
+        color: #fff !important;
+        padding-bottom: 10px !important;
+        padding-top: 10px !important;
+        min-width: 100% !important;
+        background: #000 !important;
+        height: 50px !important;
+    }
+
+    iframe {
+        width: 100%;
+        height: 600px;
+    }
+</style>
+<!--<h1 style="text-align: center;"><strong>Portal de Notas - Principal</strong></h1>
+<hr />-->
+<br />
+<h1><input type="text" disabled value="Bem Vindo(a) ao Portal LS, @Session["NomeUsuario"]" class="form-control" /></h1>
+<hr />
+
+@{
+    var sessao = Convert.ToString(Session["Tipo"]);
+
+    if (sessao == "Master")
+    {
+        <div class="homeMenu">
+            <a href="~/UsuariosFaculdades/">
+                <div class="itemHome k1">
+                    <span><strong>Usuários</strong></span>
+                </div>
+            </a>
+
+            <a href="~/Cursos/">
+                <div class="itemHome k2">
+                    <span><strong>Cursos</strong></span>
+                </div>
+            </a>
+
+            <a href="~/DisciplinasCursos/">
+                <div class="itemHome k3">
+                    <span><strong>Disciplinas</strong></span>
+                </div>
+            </a>
+
+            <a href="~/Professores/">
+                <div class="itemHome k4">
+                    <span><strong>Professores</strong></span>
+                </div>
+            </a>
+
+            <a href="~/Alunos/">
+                <div class="itemHome k5">
+                    <span><strong>Alunos</strong></span>
+                </div>
+            </a>
+
+            <a href="~/NotasAlunos/">
+                <div class="itemHome k6">
+                    <span><strong>Notas</strong></span>
+                </div>
+            </a>
+
+            <a href="">
+                <div class="itemHome k7">
+                    <span><strong>Boletos Alunos</strong></span>
+                </div>
+            </a>
+
+            <a href="">
+                <div class="itemHome k8">
+                    <span><strong>Conteúdo Blog</strong></span>
+                </div>
+            </a>
+        </div>
+    }
+
+    if (sessao == "Aluno")
+    {
+        <div class="homeMenu">
+            <a href="~/Alunos/">
+                <div class="itemHome k5">
+                    <span><strong>Dados Pessoais</strong></span>
+                </div>
+            </a>
+
+            <a href="~/NotasAlunos/">
+                <div class="itemHome k6">
+                    <span><strong>Notas</strong></span>
+                </div>
+            </a>
+
+            <a href="">
+                <div class="itemHome k7">
+                    <span><strong>Boletos</strong></span>
+                </div>
+            </a>
+
+            <a href="">
+                <div class="itemHome k8">
+                    <span><strong>Blog</strong></span>
+                </div>
+            </a>
+        </div>
+
+        <!--<iframe src="http://localhost/GeraBoletos/"></iframe>-->
+    }
+
+    if (sessao == "Professor")
+    {
+        <div class="homeMenu">
+            <a href="~/NotasAlunos/">
+                <div class="itemHome k6">
+                    <span><strong>Notas</strong></span>
+                </div>
+            </a>
+        </div>
+    }
+}
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        $('a').removeClass("active");
+        $("#home").addClass("active");
+    });
+</script>

@@ -1,0 +1,173 @@
+﻿@{
+    Layout = null;
+    ViewBag.Title = "Home";
+}
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title - Portal de Notas</title>
+    <link href="~/Content/Site.css" rel="stylesheet" type="text/css" />
+    <link href="~/Content/bootstrap.min.css" rel="stylesheet" type="text/css" />
+    <script src="~/Scripts/modernizr-2.6.2.js"></script>
+    <script src="~/Scripts/jquery-1.10.2.js"></script>
+</head>
+<body>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            height: auto !important;
+            background: url("../../Images/fundoAzul2.jpg") !important;
+            background-size: cover !important;
+            width: 100% !important;
+            float: left !important;
+            background-repeat: no-repeat !important;
+            color: #fff;
+            font-family: Arial, Helvetica, sans-serif;
+            background-color: #f4f4f4;
+        }
+
+        .top {
+            position: absolute;
+            top: 0;
+            left: 0;
+            float: left;
+            width: 100%;
+            height: auto;
+            background: #000;
+            text-align: center;
+            padding-bottom: 0px;
+            padding-top: 0px;
+        }
+
+        .containsMenu {
+            width: 900px;
+            max-width: 100%;
+            height: auto;
+            margin-top: 50px;
+        }
+
+            .containsMenu .ItemMenu {
+                float: left;
+                width: 280px;
+                margin-right: 20px;
+                height: 120px;
+                color: #fff !important;
+            }
+
+        .colorUm {
+            background: #2cd162;
+            font-size: 34px;
+            color: #085974;
+        }
+
+            .colorUm strong {
+                width: 100%;
+                text-align: center;
+                margin-top: 33px !important;
+                float: left;
+            }
+
+            .colorUm:hover {
+                background: #f00;
+                color: #fff;
+            }
+
+        .colorDois {
+            background: #09caff;
+            font-size: 34px;
+            color: #085974;
+        }
+
+            .colorDois strong {
+                width: 100%;
+                text-align: center;
+                margin-top: 33px !important;
+                float: left;
+            }
+
+            .colorDois:hover {
+                background: #0b0a42;
+                color: #fff;
+            }
+
+        .colorTres {
+            background: #ff6a00;
+            font-size: 34px;
+            color: #085974;
+        }
+
+            .colorTres strong {
+                width: 100%;
+                text-align: center;
+                margin-top: 33px !important;
+                float: left;
+            }
+
+            .colorTres:hover {
+                background: #c6ff00;
+                color: #000;
+            }
+
+        footer {
+            float: left;
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: auto;
+            background: #000;
+            text-align: center;
+            font-size: 18px;
+            padding-top: 10px;
+        }
+    </style>
+
+    <div class="top">
+        <h1><strong>Portal Acadêmico</strong></h1>
+    </div>
+    <div class="container">
+
+        @*Html.ActionLink("ADMIN", "Index", "Home", new { area = "Admin" }, null)*@
+        <div align="center">
+            <div class="containsMenu">
+                <a href="~/Login/Aluno/">
+                    <div class="ItemMenu colorUm">
+                        <span>
+                            <strong>Aluno</strong>
+                        </span>
+                    </div>
+                </a>
+
+                <a href="~/Login/Professor/">
+                    <div class="ItemMenu colorDois">
+                        <span>
+                            <strong>Professor</strong>
+                        </span>
+                    </div>
+                </a>
+
+                <a href="~/Login/Coordenador/">
+                    <div class="ItemMenu colorTres">
+                        <span>
+                            <strong>Coordenador</strong>
+                        </span>
+                    </div>
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <p>&copy; @DateTime.Now.Year - Todos os Direitos Reservados</p>
+        <p>Desenvolvido por - Lucas Soares</p>
+    </footer>
+
+    <link href="~/Content/styleResp.css" rel="stylesheet" type="text/css" />
+</body>
+</html>

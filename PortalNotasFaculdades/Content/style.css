@@ -1,0 +1,356 @@
+﻿* {
+    margin: 0;
+    padding: 0;
+}
+body {
+    height: 100%;
+    background: #fff!important;
+    font-family: 'Ubuntu', serif;
+    font-size: 16px!important;
+    color: #000!important;
+}
+
+.navbar, #bar1 {
+    background: #074458!important;
+    color: #f4f4f4 !important;
+    font-size: 18px !important;
+    margin: 0!important;
+    font-family: 'Ubuntu', sans-serif;
+    padding-bottom: 5px;
+    padding-top: 5px;
+}
+.navbar .active {
+    color: #10d167 !important;
+}
+.nav-item a {
+    color: #f4f4f4 !important;
+    margin-right: 20px !important;
+    font-size: 20px !important;
+    padding-bottom: 5px;
+    padding-top: 5px;
+}
+.navbar-brand {
+    color: #fff !important;
+    font-size: 24px!important;    
+}
+.navbar-brand:hover {
+    color: #10d167 !important;    
+}
+
+.nav-item a:hover, #bar1 a:hover {
+    color: #10d167 !important;            
+}
+
+input[readonly] {
+    background: #eee;
+    pointer-events: none;
+    touch-action: none;
+}
+select[readonly] {
+    background: #eee;
+    pointer-events: none;
+    touch-action: none;
+}
+
+.n1 {
+    background: #ccc;
+}
+.n2 {
+    background: #ededed;
+}
+.n3 {
+    background: #333;
+    color: #fff;
+}
+.mFim {
+    background: #060724;
+    color: #fff;
+}
+.sA {
+    background: #370606;
+    color: #fff;
+}
+.line {
+    float: left;
+    width: 100%;
+    height: 3px;
+    background: #333;
+    margin-bottom: 10px;
+    margin-top: 20px;
+}
+table {
+    float: left;
+    margin-bottom: 10px;
+    color: #000 !important;
+}
+
+table .firstTr {
+    background: #333!important;
+    color: #fff;
+}
+
+.homeMenu {
+    float: left;
+    width: 100%;
+    height: auto;
+}
+
+.homeMenu .itemHome {
+    background: #f00;
+    float: left;
+    width: 280px;
+    height: 120px;
+    margin-bottom: 20px;
+    margin-right: 20px;
+    font-size: 28px;
+    text-align: center;
+}
+.homeMenu .itemHome:hover {
+    background: #320c44!important;
+    color: #fff!important;
+}
+.homeMenu .k1 {
+    background: #11d327;
+    color: #fff;
+}
+.homeMenu .k2 {
+    background: #1d580c;
+    color: #fff;
+}
+.homeMenu .k3 {
+    background: #0d3407;
+    color: #fff;
+}
+.homeMenu .k4 {
+    background: #370606;
+    color: #fff;
+}
+.homeMenu .k5 {
+    background: #870707;
+    color: #fff;
+}
+.homeMenu .k6 {
+    background: #f00;
+    color: #fff;
+}
+.homeMenu .k7 {
+    background: #0e5f89;
+    color: #fff;
+}
+.homeMenu .k8 {
+    background: #0a354a;
+    color: #fff;
+}
+.homeMenu .k9 {
+    background: #031c24;
+    color: #fff;
+}
+.homeMenu .k1 strong {
+    width: 100%;
+    text-align: center;
+    margin-top: 33px !important;
+    float: left;
+}
+.homeMenu .k2 strong {
+    width: 100%;
+    text-align: center;
+    margin-top: 33px !important;
+    float: left;
+}
+.homeMenu .k3 strong {
+    width: 100%;
+    text-align: center;
+    margin-top: 33px !important;
+    float: left;
+}
+.homeMenu .k4 strong {
+   width: 100%;
+    text-align: center;
+    margin-top: 33px !important;
+    float: left;
+}
+.homeMenu .k5 strong {
+    width: 100%;
+    text-align: center;
+    margin-top: 33px !important;
+    float: left;
+}
+.homeMenu .k6 strong {
+    width: 100%;
+    text-align: center;
+    margin-top: 33px !important;
+    float: left;
+}
+.homeMenu .k7 strong {
+    width: 100%;
+    text-align: center;
+    margin-top: 33px !important;
+    float: left;
+}
+.homeMenu .k8 strong {
+    width: 100%;
+    text-align: center;
+    margin-top: 33px !important;
+    float: left;
+}
+.homeMenu .k9 strong {
+    width: 100%;
+    text-align: center;
+    margin-top: 33px !important;
+    float: left;
+}
+
+.topRefs {
+    float: left;
+    width: 100%;
+    height: 35px;
+    background: transparent;
+    margin-top: 20px;
+    padding-top: 5px;
+    padding-bottom: 5px;    
+    margin-bottom: 10px;
+}
+.topRefs span {
+    background: #3f0e42;
+    width: auto;
+    height: auto;    
+    margin-right: 2px;
+    padding-top: 4px!important;
+    padding-bottom: 4px!important;
+    float: left;  
+    border-right: 2px solid #333;
+    color: #2fc1c1!important;
+    padding-left: 10px!important;
+    padding-right: 10px!important;
+}
+.topRefs span:hover {
+    background: #205b0c!important;
+    color: #fff!important;
+}
+.topRefs .sp1 {
+    border-radius: 20px 20px 20px 0;
+    padding-left: 3px;
+    padding-right: 5px;
+}
+.topRefs .sp2 {
+    border-radius: 20px 20px 20px 0;
+    padding-left: 3px;
+    padding-right: 5px;
+}
+.topRefs .sp3 {
+    border-radius: 20px 20px 20px 0;
+    padding-left: 3px;
+    padding-right: 7px;
+}
+.topRefs .sp4 {
+    border-radius: 20px 20px 20px 0;
+    padding-left: 3px;
+    padding-right: 7px;
+}
+
+.topRefs .txt {
+    font-size: 22px;
+}
+
+.alert-danger {
+    float: left;
+    margin-top: 10px!important;
+    margin-bottom: 20px!important;
+    padding-bottom: 10px;
+    padding-top: 10px;
+}
+
+#table .btn {    
+    margin-bottom: 10px;
+    margin-right: 10px;
+}
+
+.formCreate {
+    float: left !important;
+    width: 100% !important;
+    height: auto;
+}
+.formCreate form {
+    float: left !important;
+    width: 100% !important;
+    height: auto;
+    background: #fff;
+    margin-bottom: 50px;
+}
+.formCreate .form-group {    
+    float: left;
+    width: 50%!important;
+}
+.formCreate .form-group label {
+    float: left;
+    width: 100%!important;
+    max-width: 100%;
+    color: #000;
+}
+.formCreate .form-group input, .formCreate .form-group select {
+    height: 45px!important;
+    border-radius: 6px;
+    border: 1px solid #ccc;
+    max-width: 100%;
+    margin-bottom: 0!important;
+    margin-top: 0!important;
+}
+.formCreate .btn {
+    width: auto;
+    height: 40px!important;
+    border: none!important;
+}
+
+.formCreate .formSecondary {    
+    float: left;
+    width: 100%!important;
+    border-top: 1px solid #f4f4f4;
+    margin-top: 10px;
+    margin-bottom: 20px;
+}
+.formCreate .formSecondary .formInside {    
+    float: left;
+    width: 50%!important;
+    margin-top: 10px;
+}
+.formCreate .formSecondary .formInside label {
+    float: left;
+    width: 100%!important;
+    max-width: 100%;
+    color: #000;
+}
+.formCreate .formSecondary input, .formCreate .formSecondary select {
+    height: 45px!important;
+    border-radius: 6px;
+    border: 1px solid #ccc;
+    max-width: 100%;
+    margin-bottom: 0!important;
+    margin-top: 0!important;
+}
+
+
+table .btn-secondary {
+    background: #060724 !important;
+    border: none;
+}
+table .btn-secondary:hover {
+    background: #4a1058 !important;    
+}
+table .btn-info {
+    background: #104457 !important;
+    border: none;
+}
+table .btn-info:hover {
+    background: #11757c !important;    
+}
+
+footer {
+    float: left;
+    width: 100%;
+    height: auto;
+    background: #000;
+    clear: both;
+    text-align: center;
+    color: #fff;
+    margin-top: 30px;
+}

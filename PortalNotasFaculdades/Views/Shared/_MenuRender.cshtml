@@ -1,0 +1,89 @@
+﻿<nav class="navbar navbar-expand-lg navbar-dark fixed-top">
+    @Html.ActionLink("Portal LS", "Index", "Home", new { }, new { @class = "navbar-brand", id = "home" })
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav mr-auto">
+            @{
+                var sessao = Convert.ToString(Session["Tipo"]);                
+                if (sessao == "Aluno") {
+                    <li class="nav-item">
+                        @Html.ActionLink("Notas", "Index", "NotasAlunos" + User.Identity.Name, new { }, new { @class = "nav-link", @id = "not" })
+                    </li>
+                    <li class="nav-item">
+                        @Html.ActionLink("Dados Aluno", "Index", "Alunos", new { }, new { @class = "nav-link", @id = "alun" })
+                    </li>
+                    <li class="nav-item">
+                        <a href="@Url.Action("LogOut", "Login")" class="nav-link">Sair</a>
+                    </li>
+                }
+
+                if (sessao == "Professor") {
+                    <li class="nav-item">
+                        @Html.ActionLink("Notas", "Index", "NotasAlunos", new { }, new { @class = "nav-link", @id = "not" })
+                    </li>
+                    <li class="nav-item">
+                        @Html.ActionLink("Dados Professor", "Index", "Professores", new { }, new { @class = "nav-link", @id = "prof" })
+                    </li>
+                    <li class="nav-item">
+                        <a href="@Url.Action("LogOut", "Login")" class="nav-link">Sair</a>
+                    </li>
+                }
+
+                if (sessao == "Master") {
+                    <style>
+                        .dropdown-menu {
+                            background: #074458 !important;
+                        }
+                        .dropdown-menu a:hover {
+                            background: transparent!important;
+                        }
+                    </style>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="inst navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                          Faculdade
+                        </a>
+                        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                            @Html.ActionLink("Usuários", "Index", "UsuariosFaculdades", new { }, new { @class = "nav-link dropdown-item" })
+                            @Html.ActionLink("Faculdade", "Faculdade", "UsuariosFaculdades", new { }, new { @class = "nav-link dropdown-item" })
+                        </div>
+                      </li>
+                    <li class="nav-item">
+                        @Html.ActionLink("Cursos", "Index", "Cursos", new { }, new { @class = "nav-link", @id = "curso" })
+                    </li>
+                    <li class="nav-item">
+                        @Html.ActionLink("Disciplinas dos Cursos", "Index", "DisciplinasCursos", new { }, new { @class = "nav-link", id = "disc" })
+                    </li>
+                    <li class="nav-item">
+                        @Html.ActionLink("Professores", "Index", "Professores", new { }, new { @class = "nav-link", id = "prof" })
+                    </li>
+                    <li class="nav-item">
+                        @Html.ActionLink("Alunos", "Index", "Alunos", new { }, new { @class = "nav-link", id = "alun" })
+                    </li>
+                    <li class="nav-item">
+                        @Html.ActionLink("Notas", "Index", "NotasAlunos", new { }, new { @class = "nav-link", id = "not" })
+                    </li>
+                    <li class="nav-item">
+                        <a href="@Url.Action("LogOut", "Login")" class="nav-link">Sair</a>
+                    </li>
+                }
+            }
+        </ul>
+        @{
+            if (sessao == "Aluno") { 
+                <form class="form-inline my-2 my-lg-0" action="~/NotasAlunos/_BuscaNota" method="get">
+                    <input class="form-control mr-sm-2" name="disciplina"  type="search" placeholder="Nota por Disciplina..." value="@{if (TempData["busca"] != null) {@TempData["busca"]; } }" aria-label="Search" required>
+                    <button class="btn btn-success my-2 my-sm-0" type="submit"><i class="fa fa-search"></i></button>
+                </form>
+            }
+            if (sessao == "Master") { 
+                <form class="form-inline my-2 my-lg-0" action="~/Alunos/_BuscaAluno" method="get">
+                    <input class="form-control mr-sm-2" type="search" name="nomeOrcpf" placeholder="Aluno por Nome ou CPF" value="@{if (TempData["busca"] != null) {@TempData["busca"]; } }" aria-label="Search" required>                    
+                    <button class="btn btn-success my-2 my-sm-0" type="submit"><i class="fa fa-search"></i></button>
+                </form>
+            }                            
+        }
+    </div>
+</nav>

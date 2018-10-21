@@ -1,0 +1,82 @@
+﻿@{
+    var sessao = Convert.ToString(Session["Tipo"]);
+    if (sessao == "Aluno" || sessao == "Professor")
+    {
+        Response.Write("<script>location.href='http://localhost:51948/NotasAlunosPortal';</script>");
+    }
+}
+
+@model PortalNotasFaculdades.Models.DisciplinasCursos
+
+@{
+    ViewBag.Title = "Disciplinas";
+}
+
+<div class="topRefs">
+    <a href="~/Home">
+        <span class="sp1"><strong><i class="fa fa-home fa-2x"></i></strong></span>
+    </a>
+    <a href="~/DisciplinasCursos">
+        <span class="txt sp3"><strong>Disciplinas dos Cursos</strong></span>
+    </a>
+    <a href="#">
+        <span class="txt sp4"><strong>Detalhes</strong></span>
+    </a>
+</div>
+<hr />
+
+<h2 style="text-align: center;"><strong>Disciplinas dos Cursos</strong></h2>
+<hr />
+
+<div>
+    <h4><strong>Detalhes - @Model.NomeDisciplina</strong></h4>
+    <hr />
+    <table class="table table-bordered table-striped">
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Cursos.SemestresQuant)
+            </th>
+            <td>
+                @Html.DisplayFor(model => model.Cursos.SemestresQuant)
+            </td>
+        </tr>
+
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.NomeDisciplina)
+            </th>
+            <td>
+                @Html.DisplayFor(model => model.NomeDisciplina)
+            </td>
+        </tr>
+
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.SemestreDisciplina)
+            </th>
+            <td>
+                @Html.DisplayFor(model => model.SemestreDisciplina)
+            </td>
+        </tr>
+
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.HorasAulasDadas)
+            </th>
+            <td>
+                @Html.DisplayFor(model => model.HorasAulasDadas)
+            </td>
+        </tr>
+    </table>
+</div>
+<p>
+    @Html.ActionLink("Editar", "Edit", new { id = Model.DisciplinaId }, new { @class = "btn btn-info" }) |
+    @Html.ActionLink("Voltar á Lista", "Index", new { }, new { @class = "btn btn-secondary" })
+</p>
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        $('a').removeClass("active");
+        $("#disc").addClass("active");
+    });
+</script>

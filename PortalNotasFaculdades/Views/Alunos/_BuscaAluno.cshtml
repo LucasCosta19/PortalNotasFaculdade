@@ -1,0 +1,156 @@
+﻿@{
+    var sessao = Convert.ToString(Session["Tipo"]);
+    if (sessao == "Aluno" || sessao == "Professor")
+    {
+        Response.Write("<script>location.href='http://localhost:51948/NotasAlunosPortal';</script>");
+    }
+}
+
+@model PortalNotasFaculdades.Models.Alunos
+
+@{ 
+    ViewBag.Title = "Alunos";
+}
+
+<div class="topRefs">
+    <a href="~/Home">
+        <span class="sp1"><strong><i class="fa fa-home fa-2x"></i></strong></span>
+    </a>
+    <a href="~/Alunos">
+        <span class="txt sp3"><strong>Alunos</strong></span>
+    </a>
+    <a href="#">
+        <span class="txt sp4"><strong>Detalhes</strong></span>
+    </a>
+</div>
+<hr />
+
+<h2 style="text-align: center;"><strong>Alunos</strong></h2>
+<hr />
+
+<div>
+    <h4><strong>Detalhes - @Model.NomeCompleto</strong></h4>
+    <hr />
+    <div class="table-responsive">
+        <table class="table table-bordered table-striped">
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.Cursos.NomeCurso)
+                </th>
+                <td>
+                    @Html.DisplayFor(model => model.Cursos.NomeCurso)
+                </td>
+            </tr>
+
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.EmailUsuario)
+                </th>
+                <td>
+                    @Html.DisplayFor(model => model.EmailUsuario)
+                </td>
+            </tr>
+
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.CpfUsuario)
+                </th>
+                <td>
+                    @Html.DisplayFor(model => model.CpfUsuario)
+                </td>
+            </tr>
+
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.NomeCompleto)
+                </th>
+                <td>
+                    @Html.DisplayFor(model => model.NomeCompleto)
+                </td>
+            </tr>
+
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.EnderecoUsuario)
+                </th>
+                <td>
+                    @Html.DisplayFor(model => model.EnderecoUsuario)
+                </td>
+            </tr>
+
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.CidadeUsuario)
+                </th>
+                <td>
+                    @Html.DisplayFor(model => model.CidadeUsuario)
+                </td>
+            </tr>
+
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.EstadoUsuario)
+                </th>
+                <td>
+                    @Html.DisplayFor(model => model.EstadoUsuario)
+                </td>
+            </tr>
+
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.TelefoneUsuario)
+                </th>
+                <td>
+                    @Html.DisplayFor(model => model.TelefoneUsuario)
+                </td>
+            </tr>
+
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.SituacaoUsuario)
+                </th>
+                <td>
+                    @Html.DisplayFor(model => model.SituacaoUsuario)
+                </td>
+            </tr>
+
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.DataCadastro)
+                </th>
+                <td>
+                    @Html.DisplayFor(model => model.DataCadastro)
+                </td>
+            </tr>
+
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.DataUltimoAcesso)
+                </th>
+                <td>
+                    @Html.DisplayFor(model => model.DataUltimoAcesso)
+                </td>
+            </tr>
+
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.Tipo)
+                </th>
+                <td>
+                    @Html.DisplayFor(model => model.Tipo)
+                </td>
+            </tr>
+        </table>
+    </div>
+</div>
+<p>
+    @Html.ActionLink("Editar", "Edit", new { id = Model.UsuarioId }, new { @class = "btn btn-info" }) |
+    @Html.ActionLink("Voltar á Lista", "Index", new { }, new { @class = "btn btn-secondary" })
+</p>
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        $('a').removeClass("active");
+        $("#alun").addClass("active");
+    });
+</script>

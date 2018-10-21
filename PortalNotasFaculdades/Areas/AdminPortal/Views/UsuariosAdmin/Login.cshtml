@@ -1,0 +1,161 @@
+﻿@model PortalNotasFaculdades.Areas.AdminPortal.Models.UsuariosAdmin
+
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Admin - Login</title>
+    <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+    <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+    <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+    <link href="https://fonts.googleapis.com/css?family=Ubuntu" rel="stylesheet">
+    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" />
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.4.3/css/mdb.min.css" rel="stylesheet" />
+    <style>
+        .hm-gradient {
+            background-color: #fff;
+            font-family: ubuntu, serif;
+            color: #fff !important;
+        }
+
+        .darken-grey-text {
+            color: #fff;
+        }
+
+        .danger-text {
+            color: #fff;
+        }
+
+        .default-text {
+            color: #fff;
+        }
+
+        .info-text {
+            color: #fff;
+        }
+
+        form input {
+            color: #fff !important;
+        }
+
+        .form-white .md-form label {
+            color: #fff;
+        }
+
+        .form-white input[type=text]:focus:not([readonly]) {
+            border-bottom: 1px solid #fff;
+            -webkit-box-shadow: 0 1px 0 0 #fff;
+            box-shadow: 0 1px 0 0 #fff;
+        }
+
+            .form-white input[type=text]:focus:not([readonly]) + label {
+                color: #fff;
+            }
+
+        .form-white input[type=password]:focus:not([readonly]) {
+            border-bottom: 1px solid #fff;
+            -webkit-box-shadow: 0 1px 0 0 #fff;
+            box-shadow: 0 1px 0 0 #fff;
+        }
+
+            .form-white input[type=password]:focus:not([readonly]) + label {
+                color: #fff;
+            }
+
+        .form-white input[type=password], .form-white input[type=text] {
+            border-bottom: 1px solid #fff;
+        }
+
+        .form-white .form-control:focus {
+            color: #fff;
+        }
+
+        .form-white .form-control {
+            color: #fff;
+        }
+
+        .form-white textarea.md-textarea:focus:not([readonly]) {
+            border-bottom: 1px solid #fff;
+            box-shadow: 0 1px 0 0 #fff;
+            color: #fff;
+        }
+
+        .form-white textarea.md-textarea {
+            border-bottom: 1px solid #fff;
+            color: #fff;
+        }
+
+            .form-white textarea.md-textarea:focus:not([readonly]) + label {
+                color: #fff;
+            }
+
+        .md-form {
+            text-align: left !important;
+        }
+
+        footer {
+            position: absolute;
+            left: 0;
+            bottom: 0;
+            background: #000;
+            color: #fff;
+            width: 100%;
+            height: auto;
+            text-align: center;
+        }
+
+            footer .bts {
+                position: absolute;
+                left: 0;
+                bottom: 100%;
+            }
+
+        .card {
+            background: #000;
+        }
+    </style>
+</head>
+<body class="hm-gradient">
+    <main>
+        <div align="center">
+            <div class="container mt-4">
+                <div class="col-md-6 mb-4">
+                    <div class="card">
+                        <div class="card-body">
+                            <h3 class="text-center default-text py-3"><i class="fa fa-lock"></i> Login:</h3>
+                            @using (Html.BeginForm("Authorize", "UsuariosAdmin", FormMethod.Post)) {
+                                @Html.AntiForgeryToken()
+                                <div class="md-form">
+                                    <i class="fa fa-envelope prefix grey-text"></i>
+                                    @Html.EditorFor(model => model.Email, new { htmlAttributes = new { @type = "email", required = "true", autofocus = "true", @id = "defaultForm-email", @class = "form-control" } })
+                                    <label for="defaultForm-email">E-Mail</label>
+                                    <span>@Html.ValidationMessageFor(model => model.Email)</span>
+                                </div>
+                                <div class="md-form">
+                                    <i class="fa fa-lock prefix grey-text"></i>
+                                    @Html.EditorFor(model => model.Senha, new { htmlAttributes = new { @type = "password", required = "true", @id = "defaultForm-pass", @class = "form-control" } })
+                                    <label for="defaultForm-pass">Senha</label>
+                                    <span>@Html.ValidationMessageFor(model => model.Senha)</span>
+                                </div>
+                                <div class="text-center">
+                                    <input type="submit" class="btn btn-default waves-effect waves-light" value="Próximo" />
+                                </div>
+                            }
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer>
+        <h1><strong>ADMIN</strong></h1>
+    </footer>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.4.1/js/mdb.min.js"></script>
+</body>
+</html>
+

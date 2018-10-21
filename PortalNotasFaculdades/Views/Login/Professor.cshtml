@@ -1,0 +1,173 @@
+﻿@model PortalNotasFaculdades.Models.Professores
+
+@{
+    Layout = null;
+}
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Portal do Professor - Login</title>
+    <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+    <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+    <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+    <link href="https://fonts.googleapis.com/css?family=Ubuntu" rel="stylesheet">
+    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" />
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.4.3/css/mdb.min.css" rel="stylesheet" />
+    <style>
+        .hm-gradient {
+            background: #333;
+            font-family: ubuntu, serif;
+        }
+
+        .darken-grey-text {
+            color: #2E2E2E;
+        }
+
+        .danger-text {
+            color: #ff3547;
+        }
+
+        .default-text {
+            color: #2BBBAD;
+        }
+
+        .info-text {
+            color: #33b5e5;
+        }
+
+        .form-white .md-form label {
+            color: #fff;
+        }
+
+        .form-white input[type=text]:focus:not([readonly]) {
+            border-bottom: 1px solid #fff;
+            -webkit-box-shadow: 0 1px 0 0 #fff;
+            box-shadow: 0 1px 0 0 #fff;
+        }
+
+            .form-white input[type=text]:focus:not([readonly]) + label {
+                color: #fff;
+            }
+
+        .form-white input[type=password]:focus:not([readonly]) {
+            border-bottom: 1px solid #fff;
+            -webkit-box-shadow: 0 1px 0 0 #fff;
+            box-shadow: 0 1px 0 0 #fff;
+        }
+
+            .form-white input[type=password]:focus:not([readonly]) + label {
+                color: #fff;
+            }
+
+        .form-white input[type=password], .form-white input[type=text] {
+            border-bottom: 1px solid #fff;
+        }
+
+        .form-white .form-control:focus {
+            color: #fff;
+        }
+
+        .form-white .form-control {
+            color: #fff;
+        }
+
+        .form-white textarea.md-textarea:focus:not([readonly]) {
+            border-bottom: 1px solid #fff;
+            box-shadow: 0 1px 0 0 #fff;
+            color: #fff;
+        }
+
+        .form-white textarea.md-textarea {
+            border-bottom: 1px solid #fff;
+            color: #fff;
+        }
+
+            .form-white textarea.md-textarea:focus:not([readonly]) + label {
+                color: #fff;
+            }
+
+        .ripe-malinka-gradient {
+            background-image: linear-gradient(120deg, #f093fb 0%, #f5576c 100%);
+        }
+
+        .near-moon-gradient {
+            background-image: linear-gradient(to bottom, #5ee7df 0%, #b490ca 100%);
+        }
+
+        .md-form {
+            text-align: left !important;
+        }
+
+        footer {
+            position: absolute;
+            left: 0;
+            bottom: 0;
+            background: #070c42;
+            color: #fff;
+            width: 100%;
+            height: auto;
+            text-align: center;
+        }
+
+            footer .bts {
+                position: absolute;
+                left: 0;
+                bottom: 100%;
+            }
+
+        .indigo {
+            background: #00573a !important;
+        }
+    </style>
+</head>
+<body class="hm-gradient">
+    <main>
+        <!--MDB Forms-->
+        <div align="center">
+            <div class="container mt-4">
+                <!-- Grid row -->
+                <div class="">
+                    <!-- Grid column -->
+                    <div class="col-md-6 mb-4">
+                        <div class="card indigo form-white">
+                            <div class="card-body">
+                                <h3 class="text-center white-text py-3"><i class="fa fa-user"></i> Login:</h3>
+                                @using (Html.BeginForm("AuthorizeP", "Login", FormMethod.Post))
+                                {
+                                    @Html.AntiForgeryToken()
+                                    <!--Body-->
+                                    <div class="md-form">
+                                        <i class="fa fa-envelope prefix white-text"></i>
+                                        @Html.EditorFor(model => model.EmailUsuario, new { htmlAttributes = new { @type = "email", autofocus = "true", @id = "defaultForm-email1", @class = "form-control", @required = "true" } })
+                                        <label for="defaultForm-email1">E-Mail</label>
+                                    </div>
+                                    <div class="md-form">
+                                        <i class="fa fa-lock prefix white-text"></i>
+                                        @Html.EditorFor(model => model.CpfUsuario, new { htmlAttributes = new { @type = "password", @id = "defaultForm-pass1", @class = "form-control", @required = "true" } })
+                                        <label for="defaultForm-pass1">CPF</label>
+                                    </div>
+                                    <div class="text-center">
+                                        <input type="submit" class="btn btn-default waves-effect waves-light" value="Próximo" />
+                                    </div>
+                                }
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer>
+        <h1><strong>PROFESSOR</strong></h1>
+        <div class="bts">
+            <a href="~/Login/Index/" class="btn btn-warning">Voltar</a>
+        </div>
+    </footer>
+
+    <!-- MDB core JavaScript -->
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.4.1/js/mdb.min.js"></script>
+
+</body>
+</html>

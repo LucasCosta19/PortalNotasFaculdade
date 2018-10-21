@@ -1,0 +1,86 @@
+﻿@model PortalNotasFaculdades.Models.UsuariosFaculdades
+
+@{
+    ViewBag.Title = "Usuários Faculdades";
+}
+
+<br />
+<div class="container">
+    <h2 style="text-align: center;"><strong>Usuários Faculdades</strong></h2>
+    <hr />
+    <table class="table table-striped table-bordered">
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.NomeUsuario)
+            </th>
+            <td>
+                @Html.DisplayFor(model => model.NomeUsuario)
+            </td>
+        </tr>
+
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.EmailUsuario)
+            </th>
+            <td>
+                @Html.DisplayFor(model => model.EmailUsuario)
+            </td>
+        </tr>        
+
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.SenhaUsuario)
+            </th>
+            <td>
+                ********
+            </td>
+        </tr>
+
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.NomeCompleto)
+            </th>
+            <td>
+                @Html.DisplayFor(model => model.NomeCompleto)
+            </td>
+        </tr>
+
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.DataCadastro)
+            </th>
+            <td>
+                @Html.DisplayFor(model => model.DataCadastro)
+            </td>
+        </tr>
+
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Tipo)
+            </th>
+            <td>
+                @Html.DisplayFor(model => model.Tipo)
+            </td>
+        </tr>
+
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.EmailFaculdade)
+            </th>
+            <td>
+                @Html.DisplayFor(model => model.EmailFaculdade)
+            </td>
+        </tr>
+    </table>
+
+    @Html.ActionLink("Editar", "Edit", new { id = Model.UsuarioId }, new { @class = "btn btn-info" }) |
+    @Html.ActionLink("Voltar á Lista", "Index", new { }, new { @class = "btn btn-secondary" })
+</div>
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        $('a').removeClass("active");
+        $("#users").addClass("active");
+
+    });
+</script>
